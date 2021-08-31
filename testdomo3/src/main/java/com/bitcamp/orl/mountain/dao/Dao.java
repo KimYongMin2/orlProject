@@ -12,4 +12,5 @@ public interface Dao {
 	List<MountainLocInfo> selectByLocName(@Param("locName")String locName);
 	List<MountainLocInfo> selectByLocNameSeoul();
 
+	MountainLocInfo selectByName(@Param("mountainName")String mountainName);
 }

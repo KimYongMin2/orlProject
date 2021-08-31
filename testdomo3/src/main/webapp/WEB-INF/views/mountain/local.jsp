@@ -57,7 +57,6 @@
             <img src="" alt="">
             <span>
                     <span>
-
                         산 이름을 입력하시면 해당 산에 대한 정보를 확인할 수 있습니다.
                     </span>
                 검색하기 전에 지도로 주변 산들을  둘러보세요.
@@ -79,13 +78,13 @@
                     <%--                    <button>--%>
                     <%--                        <i class="fas fa-angle-right"></i>--%>
                     <%--                    </button>--%>
-                    <img src="https://www.forest.go.kr/images/data/down/mountain/${mountainLocInfo.img}" alt="">
+                    <a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=${mountainLocInfo.mountainName}"> <img src="https://www.forest.go.kr/images/data/down/mountain/${mountainLocInfo.img}" alt=""> </a>
                 </div>
                 <div class="listings_content">
                     <div class="listings_title">
                         <div class="listings_text">
                             <span class="greyText">${loc} 산 전체</span>
-                            <h2>#${mountainLocInfo.mountainName}</h2>
+                            <a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=${mountainLocInfo.mountainName}"> <h2>#${mountainLocInfo.mountainName}</h2> </a>
                         </div>
                     </div>
                     <div class="separator"></div>
