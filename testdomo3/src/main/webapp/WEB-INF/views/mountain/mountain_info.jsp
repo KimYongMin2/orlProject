@@ -78,7 +78,6 @@
         <%
             MountainDetailInfo mountainDetailInfo = (MountainDetailInfo) request.getAttribute("mountainDetailInfo");
             MountainLocInfo mountainLocInfo = (MountainLocInfo) request.getAttribute("mountainLocInfo");
-
         %>
         <script type="text/javascript"
                 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a5188ac15584cefe54aea3746f43ba94"></script>

@@ -12,6 +12,97 @@
     <title>지역별산</title>
     <link rel="stylesheet" href="<c:url value='/css/mountain/local.css'/>">
     <link rel="stylesheet" href="<c:url value='/css/default/default.css'/>">
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            /* 이름순으로 정렬하기 */
+            $('#namelist').click(function () {
+
+                $.ajax({
+                    url: '<c:url value="/mountain/height2"/>',
+                    type: 'GET',
+                    data: {loc: '${loc}'},
+                    success: function (data) {
+                        var html = '<div id="listings" class="listings">';
+
+                        $.each(data, function (index, item) {
+                            html += ' <div class="listings_item">';
+                            html += ' <div class="listings_image">';
+                            html += '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + item.mountainName + '">';
+                            html += ' <img src="https://www.forest.go.kr/images/data/down/mountain/' + item.img + '" alt="">';
+                            html += '</a>';
+                            html += '</div>';
+                            html += ' <div class="listings_content">';
+                            html += ' <div class="listings_title">';
+                            html += ' <div class="listings_text">';
+                            html += '   <span class="greyText">${loc} 산 전체</span>';
+                            html += '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + item.mountainName + '">';
+                            html += ' <h2>#' + item.mountainName + '</h2>';
+                            html += '</a>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="listings_description">';
+                            html += '   <span >' + item.mountainAddress + ' (높이 : ' + item.height + ')</span>';
+                            html += ' <span class="greyText">' + item.mountainInfo + '</span>';
+                            html += '  </div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+
+                            $('#mlist').html(html);
+                        })
+                    }
+                });
+            })
+
+            /* 높이순으로 정렬하기 */
+            $('#heightlist').click(function () {
+
+                $.ajax({
+                    url: '<c:url value="/mountain/height"/>',
+                    type: 'GET',
+                    data: {loc: '${loc}'},
+                    success: function (data) {
+                        var html = '<div id="listings" class="listings">';
+
+                        $.each(data, function (index, item) {
+                            html += ' <div class="listings_item">';
+                            html += ' <div class="listings_image">';
+                            html += '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + item.mountainName + '">';
+                            html += ' <img src="https://www.forest.go.kr/images/data/down/mountain/' + item.img + '" alt="">';
+                            html += '</a>';
+                            html += '</div>';
+                            html += ' <div class="listings_content">';
+                            html += ' <div class="listings_title">';
+                            html += ' <div class="listings_text">';
+                            html += '   <span class="greyText">${loc} 산 전체</span>';
+                            html += '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + item.mountainName + '">';
+                            html += ' <h2>#' + item.mountainName + '</h2>';
+                            html += '</a>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="listings_description">';
+                            html += '   <span >' + item.mountainAddress + '</span>';
+                            html += ' <span class="greyText">' + item.mountainInfo + '</span>';
+                            html += '  </div>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+
+                            $('#mlist').html(html);
+                        })
+                    }
+                });
+            })
+        })
+
+
+    </script>
+
 </head>
 <body>
 <%@ include file="/WEB-INF/frame/default/header.jsp" %>
@@ -20,7 +111,7 @@
 <div class="main">
     <!--왼쪽 컨텐츠-->
     <div class="main_content">
-        <span>300()(여기 바뀌여야됨)() 개의 산</span>
+        <span>${countLoc}개의 산</span>
         <h1>${loc}</h1>
         <div class="search">
             <div class="iconsearch"></div>
@@ -47,9 +138,9 @@
 
 
         <div class="main_filters">
-            <button class="outlined curved">이름순으로 보기</button>
-            <button class="outlined curved">높이순으로 보기</button>
-            <button class="outlined curved">인기순으로 보기</button>
+            <button class="outlined curved" id="namelist">이름순으로 보기</button>
+            <button class="outlined curved" id="heightlist">높이순으로 보기</button>
+            <!--  <button class="outlined curved">인기순으로 보기</button> -->
         </div>
 
 
@@ -57,49 +148,41 @@
             <img src="" alt="">
             <span>
                     <span>
+
                         산 이름을 입력하시면 해당 산에 대한 정보를 확인할 수 있습니다.
                     </span>
                 검색하기 전에 지도로 주변 산들을  둘러보세요.
                 </span>
         </div>
-        <%
-            List<MountainLocInfo> mountainLocInfoList = (List<MountainLocInfo>) request.getAttribute("mountainLocInfoList");
-            for (int i = 0; i < mountainLocInfoList.size(); i++) {
-                request.setAttribute("mountainLocInfo", mountainLocInfoList.get(i));
 
-        %>`
+        <div id="mlist">
+            <c:forEach items="${mountainLocInfoList}" var="list">
+                <div class="listings">
 
-        <div class="listings">
-            <div class="listings_item">
-                <div class="listings_image">
-                    <%--                    <button>--%>
-                    <%--                        <i class="fas fa-angle-left"></i>--%>
-                    <%--                    </button>--%>
-                    <%--                    <button>--%>
-                    <%--                        <i class="fas fa-angle-right"></i>--%>
-                    <%--                    </button>--%>
-                    <a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=${mountainLocInfo.mountainName}"> <img src="https://www.forest.go.kr/images/data/down/mountain/${mountainLocInfo.img}" alt=""> </a>
-                </div>
-                <div class="listings_content">
-                    <div class="listings_title">
-                        <div class="listings_text">
-                            <span class="greyText">${loc} 산 전체</span>
-                            <a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=${mountainLocInfo.mountainName}"> <h2>#${mountainLocInfo.mountainName}</h2> </a>
+                    <div class="listings_item">
+                        <div class="listings_image">
+                            <a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=${list.mountainName}">
+                                <img src="https://www.forest.go.kr/images/data/down/mountain/${list.img}" alt="">
+                            </a>
+                        </div>
+                        <div class="listings_content">
+                            <div class="listings_title">
+                                <div class="listings_text">
+                                    <span class="greyText">${loc} 산 전체</span>
+                                    <a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=${list.mountainName}">
+                                        <h2>#${list.mountainName}</h2>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="listings_description">
+                                <span>${list.mountainAddress} (높이 : ${list.height})</span>
+                                <span class="greyText">${list.mountainInfo}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="separator"></div>
-                    <div class="listings_description">
-                        <span class="greyText">${mountainLocInfo.mountainAddress}</span>
-                        <span class="greyText">${mountainLocInfo.mountainInfo}</span>
-                    </div>
-
                 </div>
-            </div>
+            </c:forEach>
         </div>
-
-        <%
-            }
-        %>
     </div>
 
 
@@ -112,29 +195,32 @@
 </div>
 
 <%@ include file="/WEB-INF/frame/default/footer.jsp" %>
-
+<%
+    List<MountainLocInfo> mountainLocInfoList = (List<MountainLocInfo>) request.getAttribute("mountainLocInfoList");
+%>
 <!--카카오 지도 스크립트 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a5188ac15584cefe54aea3746f43ba94"></script>
 <script>
     var container = document.getElementById('map');
+    let x;
+    let y;
+    x = <%=mountainLocInfoList.get(0).getLongitude()%>;
+    y =<%=mountainLocInfoList.get(0).getLatitude()%>;
     var options = {
-        center: new kakao.maps.LatLng(37.549530, 128.488619),
+        // center: new kakao.maps.LatLng(x, y),
+        center: new kakao.maps.LatLng(x, y),
         level: 11
     };
     var map = new kakao.maps.Map(container, options);
 
     // 마커를 표시할 위치와 title 객체 배열입니다
     var positions = [
-        {
-            title: '<%=mountainLocInfoList.get(0).getMountainName()%>',
-            lating: new kakao.maps.LatLng(<%=mountainLocInfoList.get(0).getLongitude()%>, <%=mountainLocInfoList.get(0).getLatitude()%>)
-        }
-        <%
-        for(int i = 1; i < mountainLocInfoList.size(); i++) {
-            %>,{
+            <%
+            for(int i = 0; i < mountainLocInfoList.size(); i++) {
+                %>{
             title: '<%=mountainLocInfoList.get(i).getMountainName()%>',
             lating: new kakao.maps.LatLng(<%=mountainLocInfoList.get(i).getLongitude()%>, <%=mountainLocInfoList.get(i).getLatitude()%>)
-        }
+        },
         <%
         }
         %>

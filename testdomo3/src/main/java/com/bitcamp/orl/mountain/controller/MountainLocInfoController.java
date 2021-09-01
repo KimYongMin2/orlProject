@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -25,8 +24,12 @@ public class MountainLocInfoController {
 		loc = request.getParameter("locName");
 		List<MountainLocInfo> mountainLocInfoList = null;
 		mountainLocInfoList = service.getMountainLocInfo(loc);
+		int countLoc = service.getCountLoc(loc);
+
 		model.addAttribute("mountainLocInfoList",mountainLocInfoList);
 		model.addAttribute("loc", loc);
+		model.addAttribute("countLoc", countLoc);
+		System.out.println(mountainLocInfoList.size());
 		return "mountain/local";
 	}
 

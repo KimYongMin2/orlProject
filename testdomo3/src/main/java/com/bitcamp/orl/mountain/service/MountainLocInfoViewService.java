@@ -30,5 +30,19 @@ public class MountainLocInfoViewService {
         return mountainLocInfoList;
     }
 
+    public int getCountLoc(String loc) {
+        int result = 0;
+        if (loc != null) {
+            this.dao = (Dao)this.template.getMapper(Dao.class);
+            if(loc.equals("서울경기")){
+                result = this.dao.countByLocNameSeoul();
+            }else{
+                result = this.dao.countByLocName(loc);
+            }
+        }
+
+        return result;
+    }
+
 
 }

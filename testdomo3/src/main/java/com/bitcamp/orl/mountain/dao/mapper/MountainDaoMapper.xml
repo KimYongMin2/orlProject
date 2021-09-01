@@ -74,4 +74,57 @@
         where mname = #{mountainName};
     </select>
 
+    <!-- 해당지역의 산 갯수 카운트 -->
+    <select id="countByLocName"
+            resultType="int">
+        select count(*)
+        from mountain
+        where address regexp #{locName};
+    </select>
+
+    <!-- 해당지역의 산 갯수 카운트 -->
+    <select id="countByLocNameSeoul"
+            resultType="int">
+        select count(*)
+        from mountain
+        where address regexp '서울|경기';
+    </select>
+
+    <!-- 전체 산 리스트 (높이순) -->
+    <select
+            id="selectByLocName2"
+            resultType="com.bitcamp.orl.mountain.domain.MountainLocInfo">
+        SELECT mname,
+               mcode,
+               address,
+               x,
+               y,
+               info,
+               height,
+               detail,
+               transport,
+               img
+        FROM mountain
+        where address regexp #{locName}
+        order by height desc;
+    </select>
+
+    <!-- 전체 산 리스트 (높이순) -->
+    <select
+            id="selectByLocNameSeoul2"
+            resultType="com.bitcamp.orl.mountain.domain.MountainLocInfo">
+        SELECT mname,
+               mcode,
+               address,
+               x,
+               y,
+               info,
+               height,
+               detail,
+               transport,
+               img
+        FROM mountain
+        where address regexp '서울|경기'
+        order by height desc;
+    </select>
 </mapper>
