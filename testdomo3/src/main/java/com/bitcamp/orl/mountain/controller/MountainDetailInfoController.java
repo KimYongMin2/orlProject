@@ -1,6 +1,7 @@
 package com.bitcamp.orl.mountain.controller;
 
 
+import com.bitcamp.orl.mountain.domain.GeoWgs80;
 import com.bitcamp.orl.mountain.domain.MountainDetailInfo;
 import com.bitcamp.orl.mountain.domain.MountainLocInfo;
 import com.bitcamp.orl.mountain.service.MountainDetailInfoViewService;
@@ -27,6 +28,8 @@ public class MountainDetailInfoController {
 		MountainLocInfo mountainLocInfo = service.getMountainLocInfo(mountainName);
 		MountainDetailInfo mountainDetailInfo = null;
 		mountainDetailInfo = service.getMountainDetailInfo(mountainLocInfo.getMountainCode());
+		List<GeoWgs80> geoWgs80List = null;
+		geoWgs80List = service.getGeoList(mountainDetailInfo);
 		model.addAttribute("mountainDetailInfo",mountainDetailInfo);
 		model.addAttribute("mountainLocInfo",mountainLocInfo);
 		return "mountain/mountain_info";

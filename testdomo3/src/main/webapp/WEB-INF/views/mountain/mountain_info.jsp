@@ -2,7 +2,7 @@
 <%@ page import="com.bitcamp.orl.mountain.domain.MountainLocInfo" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -12,32 +12,36 @@
     <link rel="stylesheet" href="<c:url value='/css/mountain/mountain_info.css'/>">
 </head>
 <body>
-<%@ include file="/WEB-INF/frame/default/header.jsp"%>
+<%@ include file="/WEB-INF/frame/default/header.jsp" %>
 <div class="body_wrap">
     <div class="main_wrap_con">
         <div class="main_wrap_item main_wrap_item_1 main_wrap_item_1_top_con">
             <div class="main_wrap_item_1_top_item main_wrap_item_1_top_item_1">
-                <img src="https://www.forest.go.kr/images/data/down/mountain/${mountainLocInfo.img}" width="600px" height="390px">
+                <img src="https://www.forest.go.kr/images/data/down/mountain/${mountainLocInfo.img}" width="600px"
+                     height="500px">
             </div>
             <div class="main_wrap_item_1_top_item main_wrap_item_1_top_item_2 mountain_info_con">
-
-                <div class="mountain_info_item mountain_info_item_2">
-                    ${mountainLocInfo.mountainName}
+                <div class="mountain_info_item_name">
+                    <div class="mountain_info_item_2">
+                        ${mountainLocInfo.mountainName}
+                    </div>
                 </div>
-                <div class="mountain_info_item mountain_info_item_3">
-                    높이 : ${mountainLocInfo.height}
-                </div>
-                <div class="mountain_info_item mountain_info_item_4">
-                    위치 : ${mountainLocInfo.mountainAddress}
-                </div>
-                <div class="mountain_info_item mountain_info_item_5">
-                    정보 : ${mountainLocInfo.mountainInfo}
-                </div>
-                <div class="mountain_info_item mountain_info_item_6">
-                    ${mountainLocInfo.mountainDetailInfo}
-                </div>
-                <div class="mountain_info_item mountain_info_item_7">
-                    교통 : ${mountainLocInfo.transport}
+                <div class="mountain_info_item_detail">
+                    <div class="mountain_info_item mountain_info_item_3">
+                        높이 : ${mountainLocInfo.height}m
+                    </div>
+                    <div class="mountain_info_item mountain_info_item_4">
+                        위치 : ${mountainLocInfo.mountainAddress}
+                    </div>
+                    <div class="mountain_info_item mountain_info_item_5">
+                        정보 : ${mountainLocInfo.mountainInfo}
+                    </div>
+                    <div class="mountain_info_item mountain_info_item_6">
+                        ${mountainLocInfo.mountainDetailInfo}
+                    </div>
+                    <div class="mountain_info_item mountain_info_item_7">
+                        교통 : ${mountainLocInfo.transport}
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,31 +54,31 @@
                     <img class="img" src="../images/mountain/3.png" width="100%" height="100%">
                 </div>
                 <div class="feed_picture_item feed_picture_item2">
-                    <img class="img" src="../images/mountain/4.png"width="100%" height="100%">
+                    <img class="img" src="../images/mountain/4.png" width="100%" height="100%">
                 </div>
                 <div class="feed_picture_item feed_picture_item3">
-                    <img class="img" src="../images/mountain/5.png"width="100%" height="100%">
+                    <img class="img" src="../images/mountain/5.png" width="100%" height="100%">
                 </div>
                 <div class="feed_picture_item feed_picture_item4">
-                    <img class="img" src="../images/mountain/6.png"width="100%" height="100%">
+                    <img class="img" src="../images/mountain/6.png" width="100%" height="100%">
                 </div>
                 <div class="feed_picture_item feed_picture_item5">
-                    <img class="img" src="../images/mountain/7.png"width="100%" height="100%">
+                    <img class="img" src="../images/mountain/7.png" width="100%" height="100%">
                 </div>
                 <div class="feed_picture_item feed_picture_item6">
-                    <img class="img" src="../images/mountain/8.png"width="100%" height="100%">
+                    <img class="img" src="../images/mountain/8.png" width="100%" height="100%">
                 </div>
                 <div class="feed_picture_item feed_picture_item7">
-                    <img class="img" src="../images/mountain/9.png"width="100%" height="100%">
+                    <img class="img" src="../images/mountain/9.png" width="100%" height="100%">
                 </div>
                 <div class="feed_picture_item8">
-                    <img class="img" src="../images/icons/rightside.png"width="30px">
+                    <img class="img" src="../images/icons/rightside.png" width="30px">
                 </div>
 
             </div>
         </div>
     </div>
-    <div id="map" class="map" style="width: 100%; height: 800px; margin: 0px auto ;background-color: #000044">
+    <div id="map" class="map" style="width: 85%; height: 800px; margin: 0px auto ;">
         <%
             MountainDetailInfo mountainDetailInfo = (MountainDetailInfo) request.getAttribute("mountainDetailInfo");
             MountainLocInfo mountainLocInfo = (MountainLocInfo) request.getAttribute("mountainLocInfo");
@@ -91,7 +95,7 @@
             var map = new kakao.maps.Map(container, options);
 
             // 마커가 표시될 위치입니다
-            var markerPosition  = new kakao.maps.LatLng(<%=mountainLocInfo.getLongitude()%>, <%=mountainLocInfo.getLatitude()%>);
+            var markerPosition = new kakao.maps.LatLng(<%=mountainLocInfo.getLongitude()%>, <%=mountainLocInfo.getLatitude()%>);
 
             // 마커를 생성합니다
             var marker = new kakao.maps.Marker({
@@ -106,6 +110,6 @@
         </script>
     </div>
 </div>
-<%@ include file="/WEB-INF/frame/default/footer.jsp"%>
+<%@ include file="/WEB-INF/frame/default/footer.jsp" %>
 </body>
 </html>

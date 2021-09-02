@@ -2,16 +2,14 @@ package com.bitcamp.orl.mountain.service;
 
 import com.bitcamp.orl.mountain.dao.Dao;
 import com.bitcamp.orl.mountain.dao.MountainDetailInfoDao;
-import com.bitcamp.orl.mountain.dataObject.Root;
+import com.bitcamp.orl.mountain.domain.GeoWgs80;
 import com.bitcamp.orl.mountain.domain.MountainDetailInfo;
 import com.bitcamp.orl.mountain.domain.MountainLocInfo;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 @Service
 public class MountainDetailInfoViewService {
@@ -30,6 +28,14 @@ public class MountainDetailInfoViewService {
             mountainDetailInfo = detailInfoDao.dataToMountainDetailInfo(mountainCode);
         }
         return mountainDetailInfo;
+    }
+    public List<GeoWgs80> getGeoList(MountainDetailInfo mountainDetailInfo) {
+        List<GeoWgs80> geoWgs80List = null;
+        if (mountainDetailInfo != null) {
+            detailInfoDao = new MountainDetailInfoDao();
+            geoWgs80List = detailInfoDao.getGeo(mountainDetailInfo);
+        }
+        return geoWgs80List;
     }
 
     public MountainLocInfo getMountainLocInfo(String mountainName) {

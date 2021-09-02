@@ -46,7 +46,7 @@
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="listings_description">';
-                            html += '   <span >' + item.mountainAddress + ' (높이 : ' + item.height + ')</span>';
+                            html += '   <span >' + item.mountainAddress + ' (높이 : ' + item.height + 'm)</span>';
                             html += ' <span class="greyText">' + item.mountainInfo + '</span>';
                             html += '  </div>';
                             html += '</div>';
@@ -86,7 +86,7 @@
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="listings_description">';
-                            html += '   <span >' + item.mountainAddress + '</span>';
+                            html += '   <span >' + item.mountainAddress + ' (높이 : ' + item.height + 'm)</span>';
                             html += ' <span class="greyText">' + item.mountainInfo + '</span>';
                             html += '  </div>';
                             html += '</div>';
@@ -148,7 +148,6 @@
             <img src="" alt="">
             <span>
                     <span>
-
                         산 이름을 입력하시면 해당 산에 대한 정보를 확인할 수 있습니다.
                     </span>
                 검색하기 전에 지도로 주변 산들을  둘러보세요.
@@ -209,7 +208,7 @@
     var options = {
         // center: new kakao.maps.LatLng(x, y),
         center: new kakao.maps.LatLng(x, y),
-        level: 11
+        level: 12
     };
     var map = new kakao.maps.Map(container, options);
 
@@ -217,8 +216,9 @@
     var positions = [
             <%
             for(int i = 0; i < mountainLocInfoList.size(); i++) {
+                String mName = mountainLocInfoList.get(i).getMountainName();
                 %>{
-            title: '<%=mountainLocInfoList.get(i).getMountainName()%>',
+            title: '<%=mName%>',
             lating: new kakao.maps.LatLng(<%=mountainLocInfoList.get(i).getLongitude()%>, <%=mountainLocInfoList.get(i).getLatitude()%>)
         },
         <%
@@ -243,6 +243,7 @@
             position: positions[i].lating, // 마커를 표시할 위치
             title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
             image: markerImage // 마커 이미지
+
         });
     }
 

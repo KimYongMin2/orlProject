@@ -1,6 +1,4 @@
-package com.bitcamp.orl.mountain.dataObject;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.bitcamp.orl.mountain.dataObject.MountainDetailInfo;
 
 import java.util.List;
 
@@ -8,7 +6,7 @@ import java.util.List;
 // import com.fasterxml.jackson.annotation.JsonProperty; // version 2.11.1
 /* ObjectMapper om = new ObjectMapper();
 Root root = om.readValue(myJsonString), Root.class); */
-public class Root{
+public class MountainDetailInfoData {
     public String displayFieldName;
     public FieldAliases fieldAliases;
     public String geometryType;

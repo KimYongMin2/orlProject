@@ -1,4 +1,4 @@
-package com.bitcamp.orl.mountain.dataObject;
+package com.bitcamp.orl.mountain.dataObject.MountainDetailInfo;
 
 import java.util.List;
 
