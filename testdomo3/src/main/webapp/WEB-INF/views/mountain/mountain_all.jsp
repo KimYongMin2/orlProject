@@ -19,13 +19,19 @@
             <div class="search_item_text">
                 어디로 오를래
             </div>
-            <div class="search_item_search">
-                <input type="text" class="search_input"
-                       placeholder="산 또는 지역명을 검색해주세요. ex)서울, 북한산"
-                       onfocus="this.placeholder=''"
-                       onblur="this.placeholder='산 또는 지역명을 검색해주세요. ex)서울, 북한산'">
-                <a href="#"><span class="material-icons">search</span></a>
-            </div>
+            <form action="${pageContext.request.contextPath}/mountain/search">
+                <div class="search_item_search">
+                    <input type="text" class="search_input"
+                           placeholder="산 또는 지역명을 검색해주세요. ex)서울, 북한산"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='산 또는 지역명을 검색해주세요. ex)서울, 북한산'"
+                           name="mysearch" required>
+                    <label for="button">
+                        <i id="submit" class="fas fa-search"></i>
+                    </label>
+                    <input type="submit" id="button" style="display:none">
+                </div>
+            </form>
         </div>
 
         <div class="main_item main_item_2">

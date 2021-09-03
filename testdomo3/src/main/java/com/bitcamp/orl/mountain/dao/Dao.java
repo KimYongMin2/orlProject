@@ -9,12 +9,17 @@ import org.apache.ibatis.annotations.Param;
 
 public interface Dao {
 
+	// 지역별 산 리스트
 	List<MountainLocInfo> selectByLocName(String var1);
 	List<MountainLocInfo> selectByLocNameSeoul();
-	List<MountainLocInfo> selectByLocName2(String var1);
-	List<MountainLocInfo> selectByLocNameSeoul2();
+
+
+	List<MountainLocInfo> selectByName1(String var1);
 
 	MountainLocInfo selectByName(@Param("mountainName")String mountainName);
-	int countByLocName(@Param("locName") String var1);
+
+	//지역별 산 갯수
+	int countByLocName(@Param("locName")String var1);
 	int countByLocNameSeoul();
+
 }

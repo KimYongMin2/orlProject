@@ -14,18 +14,10 @@ public class MountainRestController {
     @Autowired
     private MountainRestService restService;
 
-    public MountainRestController() {
-    }
-
     @GetMapping("/mountain/height")
     @CrossOrigin
-    public List<MountainLocInfo> getSortingHeight(String loc) {
-        return this.restService.getSortingHeight(loc);
+    public List<MountainLocInfo> getSortingHeight(String loc){
+        return restService.getSortingHeight(loc);
     }
 
-    @GetMapping("/mountain/height2")
-    @CrossOrigin
-    public List<MountainLocInfo> getSortingHeight2(String loc) {
-        return this.restService.getSortingHeight2(loc);
-    }
 }

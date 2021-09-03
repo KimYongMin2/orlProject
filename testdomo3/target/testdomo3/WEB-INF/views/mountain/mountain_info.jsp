@@ -80,7 +80,6 @@
     </div>
     <div id="map" class="map" style="width: 85%; height: 800px; margin: 0px auto ;">
         <%
-            MountainDetailInfo mountainDetailInfo = (MountainDetailInfo) request.getAttribute("mountainDetailInfo");
             MountainLocInfo mountainLocInfo = (MountainLocInfo) request.getAttribute("mountainLocInfo");
         %>
         <script type="text/javascript"
