@@ -42,27 +42,27 @@
                 <form id="formId" action="${pageContext.request.contextPath}/mountain/mountainLocInfo" method="post">
                     <area shape="poly" alt="" title="강원"
                           coords="342,15,319,47,168,60,186,83,246,103,239,135,280,146,263,195,385,215,468,201,418,105,376,47"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <area shape="poly" alt="" title="충청북도"
                           coords="283,344,218,299,232,277,214,237,204,225,265,193,366,212,335,239,285,265"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <area shape="poly" alt="" title="서울경기"
                           coords="142,105,167,60,187,87,244,105,246,137,277,146,265,190,204,227,130,201,114,132"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <area shape="poly" alt="" title="충청남도" coords="63,246,125,195,216,237,233,280,197,331,125,346,81,302"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <area shape="poly" alt="" title="경상북도"
                           coords="285,347,348,392,485,383,490,320,469,195,341,212,284,257,284,278"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <area shape="poly" alt="" title="전라북도" coords="94,421,131,342,202,324,229,305,284,353,242,425"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <area shape="poly" alt="" title="전라남도" coords="107,556,79,426,244,427,273,503"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <area shape="poly" alt="" title="경상남도"
                           coords="359,509,271,489,244,422,284,357,355,389,474,389,453,458,426,479"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <area shape="poly" alt="" title="제주" coords="56,672,136,628,177,650,130,674,71,693,51,682"
-                          target="" onclick="updateActionByLoc(this.title)"/>
+                          target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <input type="hidden" id="locName" name="locName" value="">
                 </form>
                 <script>
