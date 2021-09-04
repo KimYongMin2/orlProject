@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,8 +16,14 @@ public class MountainLocInfoController {
 	@Autowired
 	MountainLocInfoViewService service;
 
-	@RequestMapping("/mountain/mountainLocInfo")
-	public String getMountainLoc(HttpServletRequest request, Model model) {
+	@RequestMapping(value ="/mountain/mountainLocInfo",method = RequestMethod.GET)
+	public String getMountainLocGet() {
+
+		return "mountain/mountain_all";
+	}
+
+	@RequestMapping(value ="/mountain/mountainLocInfo",method = RequestMethod.POST)
+	public String getMountainLocPost(HttpServletRequest request, Model model) {
 
 		String loc = null;
 		loc = request.getParameter("locName");

@@ -111,9 +111,7 @@
                             content:  // 인포윈도우에 표시할 내용
                                 '<div class="listings_item">' +
                                 '<div class="listings_image">' +
-                                '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + positions[i].title + '">' +
                                 '<img src="https://www.forest.go.kr/images/data/down/mountain/' + positions[i].content.img + '" alt="">' +
-                                '</a>' +
                                 '</div>' +
                                 '<div class="listings_content">' +
                                 '<div class="listings_title">' +
@@ -180,7 +178,9 @@
                 html += ' <div class="listings_title">';
                 html += ' <div class="listings_text">';
                 html += '  <span class="greyText">${loc} 산 전체</span>';
+                html += '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + item.mountainName + '">';
                 html += ' <h2>#' + item.mountainName + '</h2>';
+                html += '</a>';
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="listings_description">';
