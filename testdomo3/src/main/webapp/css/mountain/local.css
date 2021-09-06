@@ -264,11 +264,37 @@ h2 {
     width: 100%;
 }
 
-/*날'씨*/
-.nameAndWeather{
+/*날씨*/
+.nameAndWeather, .weather{
     display: flex;
+    flex-direction: row;
+
+}
+
+.weatherInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .weather{
-    margin-left: 100px;
+    flex-direction: row;
+    margin-left: 300px;
+
+}
+
+.CurrIcon{
+    font-size: 50px;
+}
+
+.CurrTemp{
+    margin-left: 30px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.City{
+    margin-left: 30px;
+    font-size: 20px;
+    margin-top: 10px;
 }

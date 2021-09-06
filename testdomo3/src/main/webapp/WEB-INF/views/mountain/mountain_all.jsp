@@ -18,11 +18,11 @@
     <div class="main">
         <div class="main_item  main_item_1 search">
             <div class="search_item_text">
-                어디로 오를래
+                <label for="searchInput">어디로 오를래</label>
             </div>
             <form action="${pageContext.request.contextPath}/mountain/search">
                 <div class="search_item_search">
-                    <input type="text" class="search_input"
+                    <input id="searchInput" type="text" class="search_input"
                            placeholder="산 또는 지역명을 검색해주세요. ex)서울, 북한산"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='산 또는 지역명을 검색해주세요. ex)서울, 북한산'"
@@ -37,7 +37,7 @@
 
         <div class="main_item main_item_2">
             <img src="${pageContext.request.contextPath}/images/mountain/map_color.png" width="700px" height="700px"
-                 usemap="#location">
+                 usemap="#location" alt="map">
             <map id="location" name="location">
                 <form id="formId" action="${pageContext.request.contextPath}/mountain/mountainLocInfo" method="post">
                     <area shape="poly" alt="" title="강원"

@@ -29,7 +29,6 @@
                 url: '<c:url value="/mountain/height"/>',
                 type: 'GET',
                 data: {loc: '${loc}'},
-                dataType: 'json',
                 success: function (data) {
                     mlist = data;
                     mountainList(mlist);
@@ -111,7 +110,7 @@
                             content:  // 인포윈도우에 표시할 내용
                                 '<div class="listings_item">' +
                                 '<div class="listings_image">' +
-                                '<img src="https://www.forest.go.kr/images/data/down/mountain/' + positions[i].content.img + '" alt="">' +
+                                '<img style="margin-left: 6px" src="https://www.forest.go.kr/images/data/down/mountain/' + positions[i].content.img + '" alt="">' +
                                 '</div>' +
                                 '<div class="listings_content">' +
                                 '<div class="listings_title">' +
@@ -240,11 +239,15 @@
     <div class="main_content">
         <span>${countLoc}개의 산</span>
         <div class="nameAndWeather">
-            <h1>${loc}</h1>
+            <div class="locName">
+                <h1>${loc}</h1>
+            </div>
             <div class="weather">
                 <div class="CurrIcon"></div>
-                <div class="CurrTemp"></div>
-                <div class="City"></div>
+                <div class="weatherInfo">
+                    <div class="CurrTemp"></div>
+                    <div class="City"></div>
+                </div>
             </div>
         </div>
         <div class="search">
