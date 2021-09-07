@@ -19,14 +19,22 @@ public class MountainRestService {
 
 
     //이름별 산 리스트 높이순
-    public List<MountainLocInfo> getSortingHeight(String loc){
+    public List<MountainLocInfo> getSortingHeight(String loc) {
         List<MountainLocInfo> mountainLocInfoList = null;
-        dao=template.getMapper(Dao.class);
+        dao = template.getMapper(Dao.class);
         if (loc.equals("서울경기")) {
             mountainLocInfoList = dao.selectByLocNameSeoul();
-        }else{
+        } else {
             mountainLocInfoList = dao.selectByLocName(loc);
         }
+        return mountainLocInfoList;
+    }
+
+    //전체 산 리스트
+    public List<MountainLocInfo> getMountainAllList() {
+        List<MountainLocInfo> mountainLocInfoList = null;
+        dao = template.getMapper(Dao.class);
+        mountainLocInfoList = dao.selectAllMountain();
         return mountainLocInfoList;
     }
 

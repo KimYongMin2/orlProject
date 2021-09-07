@@ -29,6 +29,7 @@
         where address regexp #{locName};
     </select>
 
+
     <!-- 지역별 산 리스트 -->
     <select
             id="selectByLocNameSeoul"
@@ -73,6 +74,13 @@
         where address regexp '서울|경기';
     </select>
 
+    <!-- 지역별 산 리스트(이름순) -->
+    <select
+            id="selectAllMountain"
+            resultType="com.bitcamp.orl.mountain.domain.MountainLocInfo">
+        SELECT mname, mcode, address, x, y, info,height, detail,transport, img
+        FROM mountain;
+    </select>
 
 
 </mapper>

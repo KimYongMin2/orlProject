@@ -22,4 +22,5 @@ public interface Dao {
 	int countByLocName(@Param("locName")String var1);
 	int countByLocNameSeoul();
 
+    List<MountainLocInfo> selectAllMountain();
 }

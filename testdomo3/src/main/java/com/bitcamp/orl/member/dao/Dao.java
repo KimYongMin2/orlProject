@@ -12,4 +12,6 @@ public interface Dao {
 	int insertMember(Member member);
 	
 	Member selectByIdPw(@Param("memberId")String memberId, @Param("memberPw")String memberPw);
+
+	int deleteMember(int memberIdx);
 }
