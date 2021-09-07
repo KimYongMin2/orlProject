@@ -13,6 +13,7 @@ import com.bitcamp.orl.crew.domain.Crew;
 import com.bitcamp.orl.crew.domain.SearchType;
 import com.bitcamp.orl.member.domain.Member;
 
+
 @Service
 public class CrewListViewService {
 	
@@ -20,10 +21,19 @@ public class CrewListViewService {
 	
 	@Autowired
 	private SqlSessionTemplate template;
+
+	
+	//크루 리스트 (이름순)
+	public List<Crew> getCrewNameInfo(String crewName){
+		List<Crew> crewList = null;
+	    dao = template.getMapper(Dao.class);
+		return crewList;
+	}
 	
 	public List<Crew> getMyCrewList(
 			HttpServletRequest request
 			){
+		
 		
 		List<Crew> myCrewList = null;
 		Member member = (Member) request.getSession().getAttribute("member");
@@ -34,6 +44,7 @@ public class CrewListViewService {
 		}
 		return myCrewList;
 	};
+
 	
 	public List<Crew> getMyCrewList(
 			HttpServletRequest request, 
@@ -41,7 +52,6 @@ public class CrewListViewService {
 			){
 		
 		List<Crew> myCrewList = null;
-		
 		Member member = (Member) request.getSession().getAttribute("member");
 		if (member != null) {
 			int memberIdx = member.getMemberIdx();
@@ -57,7 +67,9 @@ public class CrewListViewService {
 	}
 	
 	public List<Crew> getCrewListAll(SearchType searchType){
-		dao = template.getMapper(Dao.class);
-		return dao.selectAll(searchType);
+		return template.getMapper(Dao.class).selectCrewAll(searchType);
 	}
-}
+	
+	
+	}
+	

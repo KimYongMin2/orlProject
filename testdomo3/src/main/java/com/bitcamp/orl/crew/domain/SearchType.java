@@ -13,6 +13,7 @@ public class SearchType {
 	}
 
 	public SearchType() {
+		this.p = 1;
 	}
 
 	public int getP() {

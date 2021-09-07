@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 인터페이스의 full name을 namespace로 설정해야한다!!! -->
+<mapper namespace="com.bitcamp.orl.crew.dao.Dao">
+
+<!-- insert -->
+	<insert 
+	id="insertCrew"
+	parameterType="com.bitcamp.orl.crew.domain.Crew"
+	useGeneratedKeys="true" 
+	keyProperty="crewIdx">
+		insert into crew (crewName,crewPhoto,crewDiscription,crewTag,memberIdx,memberNickName)
+		values (#{crewName}, #{crewPhoto}, #{crewDiscription}, #{crewTag}, #{memberIdx}, #{memberNickName})
+	</insert>
+	
+	
+<!-- Select 의 결과를 매핑하는 설정 -->
+	<resultMap id="crewListResult"
+		type="com.bitcamp.orl.crew.domain.Crew">
+		<id column="crewIdx" property="crewIdx" />
+		<result column="crewName" property="crewName" />
+		<result column="crewPhoto" property="crewPhoto" />
+		<result column="crewDiscription" property="crewDiscription" />
+		<result column="crewCreatedate" property="crewCreatedate" />
+		<result column="crewTag" property="crewTag" />
+		<result column="memberIdx" property="memberIdx" />
+	</resultMap>
+	
+	<!-- 전체 크루 리스트 -->
+	<select
+		id="selectAll"
+		resultMap="crewListResult">
+			select * from crew order by crewIdx
+	</select>
+	
+		
+	<select id="selectByCrewName" resultType="int">
+		select count(*) from crew where crewName=#{crewName}
+	</select>
+<!-- 검색을 통한 크루 리스트 -->
+  <select 
+    id="selectCrewAll"
+    parameterType="com.bitcamp.orl.crew.domain.SearchType"
+    resultType="com.bitcamp.orl.crew.domain.Crew">
+    
+    select * from crew
+    <where>
+    
+    <if test="searchType == 'name'">
+     <!-- crewName like concat('%',#{keyword},'%') -->
+     <include refid="searchName"/>
+    </if>
+    <if test="searchType == 'nickName'">
+     <include refid="searchNickName"/>
+    </if>
+    <if test="searchType == 'tag'">
+     <include refid="searchTag"/>
+    </if>
+    </where>
+  
+  </select>
+    <sql id="searchName">
+    or crewName like concat('%', #{keyword} ,'%')
+    </sql>
+    <sql id="searchNickName">
+    or memberNickName like concat('%', #{keyword} ,'%')
+    </sql>
+    <sql id="searchTag">
+    or crewTag like concat('%', #{keyword} ,'%')
+    </sql>
+    
+    <!-- 페이징 처리가 가능한 회원 리스트 -->
+    <select 
+    id="selectCrewList"
+    resultType="com.bitcamp.orl.crew.domain.Crew">
+    select * from crew
+    
+    order by CrewIdx limit #{param1}, #{param2}
+    
+    </select>
+    <select 
+    id="selectTotalCount"
+    resultType="int">
+    select count(*) from crew
+    </select>
+
+	<!-- 내가 가입한 크루 리스트 -->
+	<select
+	id="selectMyCrewList"
+	resultMap="crewListResult">
+		select * from crew where crewIdx = (select crewIdx from crewreg where memberIdx= #{memberIdx});
+	</select>
+	
+	<!-- 해당 크루 하나 선택 -->
+	<select
+	id="selectCrew"
+	resultType="com.bitcamp.orl.crew.domain.Crew">
+		select * from crew where crewIdx = #{crewIdx}
+	</select>
+	
+	<!-- 해당 크루의 크루원 수 -->
+	<select
+	id = "selectCrewMemberNum"
+	resultType="int">
+		select count(*) from crewreg where crewIdx = #{crewIdx}
+	</select>
+	
+	<!-- 해당 크루의 댓글 수 -->
+	<select
+	id= "selectCrewCommentNum"
+	resultType="int">
+		select count(*) from crewComment where crewIdx = #{crewIdx}
+	</select>
+	
+	<!-- 해당 크루에 내가 가입되어있는 지 여부 확인 -->
+	<select
+	id = "selectCountMemberToRegCrew"
+	resultType="int">
+		select count(*) from crewreg where memberIdx = #{memberIdx} and crewIdx = #{crewIdx};
+	</select>
+	
+	<!-- 크루 댓글 작성자 찾기 -->
+	<select 
+	id = "selectMemberByMemberIdx"
+	resultType="com.bitcamp.orl.member.domain.Member">
+		select * from member where memberIdx = #{memberIdx}
+	</select>
+	
+	
+	<!-- Select 의 결과를 매핑하는 설정 -->
+	<resultMap id="crewCommentListResult"
+		type="com.bitcamp.orl.crew.domain.CrewComment">
+		<id column="crewCommentIdx" property="crewCommentIdx" />
+		<result column="crewComment" property="crewComment" />
+		<result column="crewCommentDate" property="crewCommentDate" />
+		<result column="memberIdx" property="memberIdx" />
+		<result column="crewIdx" property="crewIdx" />
+	</resultMap>
+	
+	<!-- 크루 댓글 가져오기 -->
+	<select
+	id = "selectCrewComment"
+	resultMap="crewCommentListResult">
+		select * from crewComment where crewIdx = #{crewIdx}
+	</select>
+	
+	<!-- insert -->
+	<insert 
+	id="insertCrewReg"
+	parameterType="com.bitcamp.orl.crew.domain.CrewReg">
+		insert into crewreg (memberIdx, crewIdx)
+		values (#{memberIdx}, #{crewIdx})
+	</insert>
+	
+	<insert 
+	id="insertCrewComment"
+	parameterType="com.bitcamp.orl.crew.domain.CrewComment">
+		insert into crewComment (crewComment, memberIdx, crewIdx) 
+		values (#{crewComment}, #{memberIdx}, #{crewIdx})
+	</insert>
+	
+	<!-- 크루 댓글 페이징 처리를 위한 select -->
+	<select
+	id="selectCrewCommentPaging"
+	resultMap="crewCommentListResult">
+		select * from crewComment where crewIdx=#{crewIdx} 
+		order by crewCommentDate desc limit #{firstRow}, #{amountPerPage}
+	</select>
+		<!-- insert -->
+
+</mapper>
