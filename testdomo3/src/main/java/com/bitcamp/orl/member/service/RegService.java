@@ -1,11 +1,11 @@
 package com.bitcamp.orl.member.service;
 
-import com.bitcamp.orl.member.domain.Member;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.orl.member.dao.Dao;
+import com.bitcamp.orl.member.domain.Member;
 import com.bitcamp.orl.member.domain.MemberRequest;
 
 @Service

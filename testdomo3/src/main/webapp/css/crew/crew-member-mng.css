@@ -89,10 +89,10 @@
 	color: white;
 }
 
-.remove_input {
+.nav2 .remove_input {
 	min-width: 250px;
 }
 
-td {
+.nav2 td {
 	line-height: 2.5rem;
 }

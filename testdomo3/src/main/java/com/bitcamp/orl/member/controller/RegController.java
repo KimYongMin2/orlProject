@@ -17,13 +17,11 @@ public class RegController {
 	private RegService regservice;
 
 	@RequestMapping(method = RequestMethod.GET)
-//	@RequestMapping(value = "/member/reg", method = RequestMethod.GET)
 	public String regForm() {
 		return "member/regForm";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-//	@RequestMapping(value = "/member/reg", method = RequestMethod.POST)
 	public String reg(
 			MemberRequest memberRequest, 
 			Model model) {

@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
-body{
+body {
 	font-family: var(--text-sans);
 }
+
 #profile {
 	height: 25px;
 	border-radius: 50%;

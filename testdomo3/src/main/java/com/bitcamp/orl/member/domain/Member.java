@@ -2,6 +2,8 @@ package com.bitcamp.orl.member.domain;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Member {
 	
 	private int memberIdx;
@@ -11,7 +13,9 @@ public class Member {
 	private String memberEmail;
 	private String memberProfile;
 	private String memberNickname;
+	@JsonFormat(pattern = "yyyy.MM.dd. HH:mm")
 	private Timestamp memberRegdate;
+	@JsonFormat(pattern = "yyyy.MM.dd. HH:mm")
 	private Timestamp memberBirth;
 	
 	public Member() {}

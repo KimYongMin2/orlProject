@@ -37,7 +37,7 @@ p {
 	justify-content: center;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	margin: 5% 15% 5% 15%;
+	margin: 5% 10% 5% 10%;
 }
 
 .card {
@@ -224,6 +224,7 @@ p {
 }
 
 .input_section {
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;

@@ -2,29 +2,32 @@ package com.bitcamp.orl.crew.domain;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class CrewComment {
-	private int crewCommnetIdx;
+	private int crewCommentIdx;
 	private String crewComment;
+	@JsonFormat(pattern = "yyyy.MM.dd. HH:mm")
 	private Timestamp crewCommentDate;
 	private int memberIdx;
 	private int crewIdx;
 	
 	public CrewComment() {}
 	
-	public CrewComment(int crewCommnetIdx, String crewComment, Timestamp crewCommentDate, int memberIdx, int crewIdx) {
-		this.crewCommnetIdx = crewCommnetIdx;
+	public CrewComment(int crewCommentIdx, String crewComment, Timestamp crewCommentDate, int memberIdx, int crewIdx) {
+		this.crewCommentIdx = crewCommentIdx;
 		this.crewComment = crewComment;
 		this.crewCommentDate = crewCommentDate;
 		this.memberIdx = memberIdx;
 		this.crewIdx = crewIdx;
 	}
 
-	public int getCrewCommnetIdx() {
-		return crewCommnetIdx;
+	public int getCrewCommentIdx() {
+		return crewCommentIdx;
 	}
 
-	public void setCrewCommnetIdx(int crewCommnetIdx) {
-		this.crewCommnetIdx = crewCommnetIdx;
+	public void setCrewCommentIdx(int crewCommentIdx) {
+		this.crewCommentIdx = crewCommentIdx;
 	}
 
 	public String getCrewComment() {
@@ -60,7 +63,7 @@ public class CrewComment {
 	}
 	
 	public CrewCommentInfo CommentToInfo() {
-		CrewCommentInfo info = new CrewCommentInfo(crewCommnetIdx, 
+		CrewCommentInfo info = new CrewCommentInfo(crewCommentIdx, 
 				crewComment, crewCommentDate, memberIdx, crewIdx, null, null);
 		return info;
 	}

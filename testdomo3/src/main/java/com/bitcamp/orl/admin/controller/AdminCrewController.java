@@ -18,17 +18,17 @@ public class AdminCrewController {
 
 	@Autowired
 	private CrewListViewService service;
-	
+
 	@RequestMapping("/admin/crew")
 	public String CrewList(HttpServletRequest request, Model model) {
-		
+
 		List<Crew> crewList = null;
-		
+
 		crewList=service.getCrewListAll();
-		
+
 		model.addAttribute("crewList",crewList);
-		
+
 		return "admin/admin_crew";
 	}
-	
+
 }

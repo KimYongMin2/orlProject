@@ -60,7 +60,7 @@
 				var html = '';
 				var html2 = '';
 				$.each(data.infoList, function(index, item){
-					html += '<tr><td><img id="profile" src="<c:url value="/images/crew/default.jpg"/>"></td>';
+					html += '<tr><td><img id="profile" src="<c:url value="/images/default.jpg"/>"></td>';
 					html +=	'<td><p id="nickname">'+item.memberNickName+'</p>';
 					html += '<p class="content">'+item.crewComment+'</p>';
 					html += '<p class="date">'+item.crewCommentDate+'</p>';
@@ -91,6 +91,11 @@
 <%@ include file="/WEB-INF/frame/default/header.jsp"%>
 </head>
 <body>
+<c:if test="${updateResult eq 1}">
+<script>
+	alert('수정되었습니다.')
+</script>
+</c:if>
 	<div class="section">
 		<section>
 			<div class="box">
@@ -102,7 +107,7 @@
 						<div class="crew_name_section">
 							<h3 class="card-title">${crew.crewName}</h3>
 							<c:if test="${member.memberIdx eq crew.memberIdx}">
-							<a href='<c:url value="/crew/edit"/>'
+							<a href='<c:url value="/crew/edit/${crew.crewIdx}"/>'
 								class="btn btn-sm color_blue text_bold">크루 관리</a>
 							</c:if>
 						</div>
