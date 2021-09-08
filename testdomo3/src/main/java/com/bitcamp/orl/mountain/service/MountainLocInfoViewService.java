@@ -17,8 +17,8 @@ public class MountainLocInfoViewService {
     @Autowired
     private SqlSessionTemplate template;
 
-    //지역별 산 리스트 (이름순)기본
-    public List<MountainLocInfo> getMountainLocInfo(String loc){
+    //지역별 산 리스트
+    public List<MountainLocInfo> getMountainLocInfo(String loc) {
         List<MountainLocInfo> mountainLocInfoList = null;
         if (loc != null) {
             dao = template.getMapper(Dao.class);
@@ -29,32 +29,30 @@ public class MountainLocInfoViewService {
             }
         }
         return mountainLocInfoList;
-    };
+    }
 
 
     //이름검색시 산 리스트
-    public List<MountainLocInfo> getMountainName1(String mname){
+    public List<MountainLocInfo> getMountainSearchName(String mname) {
         List<MountainLocInfo> mountainLocInfoList = null;
         if (mname != null) {
             dao = template.getMapper(Dao.class);
 
-            mountainLocInfoList = dao.selectByName1(mname);
+            mountainLocInfoList = dao.selectBySearchName(mname);
 
         }
         return mountainLocInfoList;
-    };
-
-
+    }
 
 
     //지역별 산 갯수
     public int getCountLoc(String loc) {
         int result = 0;
         if (loc != null) {
-            this.dao = (Dao)this.template.getMapper(Dao.class);
-            if(loc.equals("서울경기")){
+            this.dao = (Dao) this.template.getMapper(Dao.class);
+            if (loc.equals("서울경기")) {
                 result = this.dao.countByLocNameSeoul();
-            }else{
+            } else {
                 result = this.dao.countByLocName(loc);
             }
         }
@@ -62,9 +60,10 @@ public class MountainLocInfoViewService {
         return result;
     }
 
-    public String getLocEn(String loc){
+    // 날씨 api를 위한 함수(지역을 영어로)
+    public String getLocEn(String loc) {
         String locEn = "";
-        switch (loc){
+        switch (loc) {
             case "서울경기":
                 locEn = "seoul";
                 break;
@@ -95,7 +94,6 @@ public class MountainLocInfoViewService {
 
         return locEn;
     }
-
 
 
 }

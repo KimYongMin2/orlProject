@@ -41,11 +41,11 @@
       </div>
     </form>
 
-    <c:if test="${not empty mountainList}">
+    <c:if test="${not empty mountainListByName}">
       <h3 class="selectArea">해당 산의 검색결과</h3>
     </c:if>
     <div id="selectList">
-      <c:forEach items="${mountainList}" var="list">
+      <c:forEach items="${mountainListByName}" var="list">
         <div class="item">
           <a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=${list.mountainName}">
             <img class="img" src="https://www.forest.go.kr/images/data/down/mountain/${list.img}" alt="" width="200px" height="200px">
@@ -55,11 +55,11 @@
       </c:forEach>
     </div>
 
-    <c:if test="${not empty mountainList2}">
+    <c:if test="${not empty mountainListByLoc}">
       <h3 class="selectArea">해당 지역의 검색결과</h3>
     </c:if>
     <div id="selectList">
-      <c:forEach items="${mountainList2}" var="list">
+      <c:forEach items="${mountainListByLoc}" var="list">
         <div class="item">
           <a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=${list.mountainName}">
             <img class="img" src="https://www.forest.go.kr/images/data/down/mountain/${list.img}" alt="" width="200px" height="200px">

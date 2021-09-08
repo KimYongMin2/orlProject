@@ -14,15 +14,17 @@ public class MountainRestController {
     @Autowired
     private MountainRestService restService;
 
-    @GetMapping("/mountain/height")
+    // 지역별 산 리스트
+    @GetMapping("/mountain/local")
     @CrossOrigin
-    public List<MountainLocInfo> getSortingHeight(String loc){
-        return restService.getSortingHeight(loc);
+    public List<MountainLocInfo> getMountainLoc(String loc){
+        return restService.getMountainLocList(loc);
     }
 
+    // 전국 산 리스트
     @GetMapping("/mountain/all")
     @CrossOrigin
-    public List<MountainLocInfo> getMountainAll(String loc){
+    public List<MountainLocInfo> getMountainAll(){
         return restService.getMountainAllList();
     }
 

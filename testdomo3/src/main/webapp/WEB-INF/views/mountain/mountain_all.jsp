@@ -35,6 +35,7 @@
             </form>
         </div>
 
+        <!-- 전국지도 이미지-->
         <div class="main_item main_item_2">
             <img src="${pageContext.request.contextPath}/images/mountain/map_color.png" width="700px" height="700px"
                  usemap="#location" alt="map">
@@ -65,12 +66,14 @@
                           target="" onclick="updateActionByLoc(this.title)" style="cursor: pointer"/>
                     <input type="hidden" id="locName" name="locName" value="">
                 </form>
+
                 <script>
                     function updateActionByLoc(loc){
                         $("#locName").val(loc);
                         $("#formId").submit();
                     }
                 </script>
+
             </map>
         </div>
     </div>

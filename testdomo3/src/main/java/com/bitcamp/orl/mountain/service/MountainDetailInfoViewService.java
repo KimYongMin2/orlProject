@@ -14,6 +14,7 @@ public class MountainDetailInfoViewService {
     @Autowired
     private SqlSessionTemplate template;
 
+    // 산 이름에 해당하는 산 객체 가져오는 서비스
     public MountainLocInfo getMountainLocInfo(String mountainName) {
         MountainLocInfo mountainLocInfo = null;
         if (mountainName != null) {

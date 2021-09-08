@@ -23,63 +23,160 @@
     <script>
         $(document).ready(function () {
 
-            var mlist = [];
-            var mAllList = [];
+            var mList = [];
+            var allList = [];
 
+            // 시작할때 비동기 통신으로 지역별 산 리스트 받아와서 mList에 저장
             $.ajax({
-                url: '<c:url value="/mountain/height"/>',
+                url: '<c:url value="/mountain/local"/>',
                 type: 'GET',
                 data: {loc: '${loc}'},
                 success: function (data) {
-                    mlist = data;
-                    mountainList(mlist);
+                    mList = data;
+                    mountainList(mList);
+                    map(mList);
                 }
 
             })
 
+            // 시작할때 비동기 통신으로 전국 산 리스트 받아와서 allList에 저장
             $.ajax({
                 url: '<c:url value="/mountain/all"/>',
                 type: 'GET',
                 success: function (data) {
-                    mAllList = data;
                     console.log(data);
-                    getMap(mlist, mAllList);
+                    allList = data;
                 }
-
             })
 
 
+            // 지도 상단 전국 산 보기 버튼 클릭 시 전국 산이 마킹된 지도 세팅
+            $('#mapbutton1').click(function(){
+                map(allList);
+            })
+
+            // 지도 상단 지역별 산 보기 버튼 클릭 시 지역별 산이 마킹된 지도 세팅
+            $('#mapbutton2').click(function(){
+                map(mList);
+            })
+
+            // 높이순으로 보기 클릭 시 mList 높이순으로 정렬
             $('#heightlist').click(function () {
-
-
-                mlist.sort(function (left, right) {
+                mList.sort(function (left, right) {
                     return right.height - left.height;
                 })
-
-                console.log("높이순으로정렬");
-                console.log(mlist);
-                mountainList(mlist);
+                mountainList(mList);
             })
 
-
+            // 이름순으로 보기 클릭 시 mList 이름순으로 정렬
             $('#namelist').click(function () {
-                console.log(" 이름순으로정렬");
-                console.log(mlist);
-                mlist.sort(function (a, b) {
+                mList.sort(function (a, b) {
                     return a.mountainName < b.mountainName ? -1 : a.mountainName > b.mountainName ? 1 : 0;
                 })
-                mountainList(mlist);
+                mountainList(mList);
             })
 
         });
 
-        function mountainList(mlist) {
-            var mmlist = [];
-            mmlist = mlist;
-            console.log("리스트 함수 호출");
-            console.log(mmlist);
+        // 카카오 맵에 산리스트 마킹후 지도보여주기
+        function map(mList) {
+            var container = document.getElementById('map');
+            let x = mList[0].longitude;
+            let y = mList[0].latitude;
+            var options = {
+                center: new kakao.maps.LatLng(x, y),
+                level: 12
+            };
+            var map = new kakao.maps.Map(container, options);
+
+            // 마커를 표시할 위치와 title 객체 배열입니다
+            var positions = [];
+
+            for (const x of mList) {
+                positions.push({
+                    title: x.mountainName,
+                    lating: new kakao.maps.LatLng(x.longitude, x.latitude),
+                    content: {
+                        img: x.img,
+                        mountainName: x.mountainName,
+                        mountainAddress: x.mountainAddress,
+                        height: x.height
+                    }
+                });
+            }
+
+            // 마커 이미지의 이미지 주소입니다
+            var imageSrc = "${pageContext.request.contextPath}/images/mountain/m2.png";
+
+            for (var i = 0; i < positions.length; i++) {
+
+                // 마커 이미지의 이미지 크기 입니다
+                var imageSize = new kakao.maps.Size(30, 30);
+
+                // 마커 이미지를 생성합니다
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                for (var i = 0; i < positions.length; i++) {
+                    // 마커를 생성합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map, // 마커를 표시할 지도
+                        position: positions[i].lating, // 마커를 표시할 위치
+                        image: markerImage, // 마커 이미지
+                    });
+
+                    // 마커에 표시할 인포윈도우를 생성합니다
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content:  // 인포윈도우에 표시할 내용
+                            '<div class="infowindow">'+
+                            '<div class="mapimage">'+
+                            '<img src="https://www.forest.go.kr/images/data/down/mountain/' + positions[i].content.img + '" alt="">'+
+                            '</div>'+
+                            '<div class="mapcontent">'+
+                            '<div class="mtitle">#' + positions[i].content.mountainName + '</div>'+
+                            '<div>' + positions[i].content.mountainAddress + '(높이 : ' + positions[i].content.height + 'm)</div>' +
+                            '</div>'+
+                            '</div>'
+                    });
+
+                    var mName = positions[i].title;
+                    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+                    // 이벤트 리스너로는 클로저를 만들어 등록합니다
+                    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+                    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+                    kakao.maps.event.addListener(marker, 'click', link(mName));
+                }
+
+                // 마커 아이콘 클릭 시 상세페이지로 넘어가는 함수
+                function link(name) {
+                    return function () {
+                        location.href = '${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + name;
+                    };
+                }
+
+                // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+                function makeOverListener(map, marker, infowindow) {
+                    return function () {
+                        infowindow.open(map, marker);
+                    };
+                }
+
+                // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+                function makeOutListener(infowindow) {
+                    return function () {
+                        infowindow.close();
+                    };
+                }
+            }
+        }
+
+        // 지역 별 산 리스트 출력하는 함수
+        function mountainList(mList) {
+            var mountainList = [];
+            mountainList = mList;
+
             var html = '<div id="listings" class="listings">';
-            $.each(mmlist, function (index, item) {
+            $.each(mountainList, function (index, item) {
                 html += ' <div class="listings_item">';
                 html += ' <div class="listings_image">';
                 html += '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + item.mountainName + '">';
@@ -103,10 +200,11 @@
                 html += '</div>';
                 html += '</div>';
 
-                $('#mlist').html(html);
+                $('#mList').html(html);
             })
         }
 
+        /* 날씨 api */
         let weatherIcon = {
             '01': 'fas fa-sun',
             '02': 'fas fa-cloud-sun',
@@ -138,139 +236,10 @@
             }
         })
 
+
     </script>
 
 
-    <script>
-        var positions = [];
-        var allMPositions = [];
-        var map = null;
-        function getMap(mlist, mAllList) {
-            let x = mlist[0].longitude;
-            let y = mlist[0].latitude;
-            var options = {
-                center: new kakao.maps.LatLng(x, y),
-                level: 12
-            };
-            var container = document.getElementById('map');
-            map = new kakao.maps.Map(container, options);
-
-            for (const x of mlist) {
-                positions.push({
-                    title: x.mountainName,
-                    latLng: new kakao.maps.LatLng(x.longitude, x.latitude),
-                    content: {
-                        img: x.img,
-                        mountainName: x.mountainName,
-                        mountainAddress: x.mountainAddress,
-                        height: x.height
-                    }
-                });
-            }
-
-            for (const x of mAllList) {
-                allMPositions.push({
-                    title: x.mountainName,
-                    latLng: new kakao.maps.LatLng(x.longitude, x.latitude),
-                    content: {
-                        img: x.img,
-                        mountainName: x.mountainName,
-                        mountainAddress: x.mountainAddress,
-                        height: x.height
-                    }
-                });
-            }
-            // 마커를 표시할 위치와 title 객체 배열입니다
-
-
-            // 마커 이미지의 이미지 주소입니다
-            var imageSrc = "${pageContext.request.contextPath}/images/mountain/m2.png";
-
-            for (var i = 0; i < positions.length; i++) {
-
-                // 마커 이미지의 이미지 크기 입니다
-                var imageSize = new kakao.maps.Size(30, 30);
-
-                // 마커 이미지를 생성합니다
-                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-                for (var i = 0; i < positions.length; i++) {
-                    // 마커를 생성합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map, // 마커를 표시할 지도
-                        position: positions[i].latLng, // 마커를 표시할 위치
-                        image: markerImage, // 마커 이미지
-                    });
-
-                    // 마커에 표시할 인포윈도우를 생성합니다
-                    var infowindow = new kakao.maps.InfoWindow({
-                        content:  // 인포윈도우에 표시할 내용
-                            '<div class="listings_item">' +
-                            '<div class="listings_image">' +
-                            '<img style="margin-left: 6px" src="https://www.forest.go.kr/images/data/down/mountain/' + positions[i].content.img + '" alt="">' +
-                            '</div>' +
-                            '<div class="listings_content">' +
-                            '<div class="listings_title">' +
-                            '<div class="listings_text">' +
-                            '<h2>#' + positions[i].content.mountainName + '</h2>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="listings_description">' +
-                            '<span >' + positions[i].content.mountainAddress + '(높이 : ' + positions[i].content.height + 'm)</span>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>'
-                    });
-
-                    var mName = positions[i].title;
-                    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-                    // 이벤트 리스너로는 클로저를 만들어 등록합니다
-                    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-                    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-                    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-                    kakao.maps.event.addListener(marker, 'click', link(mName));
-                }
-
-//
-                function link(name) {
-                    return function () {
-                        location.href = '${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + name;
-                    };
-                }
-
-                // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
-                function makeOverListener(map, marker, infowindow) {
-                    return function () {
-                        infowindow.open(map, marker);
-                    };
-                }
-
-                // 인포윈도우를 닫는 클로저를 만드는 함수입니다
-                function makeOutListener(infowindow) {
-                    return function () {
-                        infowindow.close();
-                    };
-                }
-
-            }
-
-        function setMarkers(map) {
-            for (var i = 0; i < positions.length; i++) {
-                positions[i].setMap(map);
-            }
-        }
-
-        // "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
-        function showMarkers() {
-            setMarkers(map)
-        }
-
-        // "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
-        function hideMarkers() {
-            setMarkers(null);
-        }
-    </script>
 </head>
 <body>
 <%@ include file="/WEB-INF/frame/default/header.jsp" %>
@@ -302,7 +271,7 @@
             <span id='clearIcon' class="clear" style="display:none;"
                   onclick="document.getElementById('mysearch').value=''"></span>
         </div>
-
+        <!-- 검색 아이콘 -->
         <script>
             const iconsearch = document.querySelector('.iconsearch');
             const search = document.querySelector('.search');
@@ -318,10 +287,10 @@
         </script>
 
 
+        <!-- 정렬을 위한 버튼-->
         <div class="main_filters">
-            <button class="outlined curved" id="namelist" type="submit" value="namelist">이름순으로 보기</button>
-            <button class="outlined curved" id="heightlist" type="submit" value="heightlist">높이순으로 보기</button>
-            <!--  <button class="outlined curved">인기순으로 보기</button> -->
+            <button class="outlined curved" id="namelist"  value="namelist">이름순으로 보기</button>
+            <button class="outlined curved" id="heightlist"  value="heightlist">높이순으로 보기</button>
         </div>
 
 
@@ -335,7 +304,8 @@
                 </span>
         </div>
 
-        <div id="mlist">
+        <!-- 지역별 산 리스트 출력되는 공간-->
+        <div id="mList">
 
 
         </div>
@@ -351,11 +321,12 @@
         <div class="main_kakaoMap">
             <div class="map" id='map'></div>
         </div>
-        <button onclick="showMarkers()" class="mapbutton mapbutton1">전국 산 보기</button>
-        <button onclick="hideMarkers()" class="mapbutton mapbutton2">지역별 산 보기</button>
+        <button id="mapbutton1" class="mapbutton mapbutton1">전국 산 보기</button>
+        <button id="mapbutton2" class="mapbutton mapbutton2">지역별 산 보기</button>
     </div>
 
 </div>
+
 
 <%@ include file="/WEB-INF/frame/default/footer.jsp" %>
 

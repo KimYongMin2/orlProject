@@ -16,12 +16,12 @@ public class MountainDetailInfoController {
 	@Autowired
 	MountainDetailInfoViewService service;
 
+	// 산 상세 보여주는 컨트롤러
 	@RequestMapping("/mountain/mountainDetailInfo")
 	public String getMountainLoc(HttpServletRequest request, Model model) {
 
 		String mountainName = null;
 		mountainName = request.getParameter("mountainName");
-		System.out.println(mountainName);
 		MountainLocInfo mountainLocInfo = service.getMountainLocInfo(mountainName);
 		model.addAttribute("mountainLocInfo",mountainLocInfo);
 		return "mountain/mountain_info";

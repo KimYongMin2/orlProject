@@ -176,32 +176,7 @@ button {
     height: 100%;
     width: 100%;
 }
-.listings_image button {
-    position: absolute;
-    top: 50%;
-    width: 32px;
-    height: 32px;
-    background: white;
-    border-radius: 50%;
-    overflow: hidden;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    opacity: 0;
-    transition: 0.1s ease-in;
-    cursor: pointer;
-}
-.listings_image button:hover {
-    opacity: 1 !important;
-}
-.listings_image button:first-of-type {
-    left: 10px;
-}
-.listings_image button:last-of-type {
-    right: 10px;
-}
+
 
 .listings_title {
     display: flex;
@@ -263,6 +238,55 @@ h2 {
     height: 100%;
     width: 100%;
 }
+.mapbutton{
+    position:fixed;
+    right:100px;
+    top:120px;
+    z-index:100;
+    background-color:var(--yello-color);
+    border: 1px solid #b0b0b0;
+    border-radius: 5px;
+    height:45px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.mapbutton1{
+    right:150px;
+}
+.mapbutton2{
+    right:15px;
+}
+.mapbutton:hover {
+    border-color: #222;
+}
+/*맵 인포윈도우*/
+.infowindow{
+    width:370px;
+    height: 160px;
+    display: flex;
+    padding:10px;
+}
+.mapimage img{
+    width:200px;
+    height: 130px;
+    margin-top: 4px;
+    margin-left:3px;
+    border-radius: 5px;
+}
+.mapimage{
+    display: inline-block;
+
+}
+.mapcontent{
+    margin-left: 10px;
+}
+.mtitle{
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+
 
 /*날씨*/
 .nameAndWeather, .weather{
@@ -297,26 +321,4 @@ h2 {
     margin-left: 30px;
     font-size: 20px;
     margin-top: 10px;
-}
-
-.mapbutton{
-    position:fixed;
-    right:100px;
-    top:120px;
-    z-index:100;
-    background-color:var(--yello-color);
-    border: 1px solid #b0b0b0;
-    border-radius: 5px;
-    height:45px;
-    font-weight:bold;
-    cursor:pointer;
-}
-.mapbutton1{
-    right:150px;
-}
-.mapbutton2{
-    right:15px;
-}
-.mapbutton:hover {
-    border-color: #222;
 }

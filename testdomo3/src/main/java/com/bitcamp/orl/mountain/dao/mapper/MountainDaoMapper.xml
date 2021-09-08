@@ -20,20 +20,20 @@
 
     </resultMap>
 
-    <!-- 지역별 산 리스트(이름순) -->
+    <!-- 지역별 산 리스트 -->
     <select
             id="selectByLocName"
-            resultType="com.bitcamp.orl.mountain.domain.MountainLocInfo">
+            resultMap="MountainListResult">
         SELECT mname, mcode, address, x, y, info,height, detail,transport, img
         FROM mountain
         where address regexp #{locName};
     </select>
 
 
-    <!-- 지역별 산 리스트 -->
+    <!-- 지역별 산 리스트 (서울경기)-->
     <select
             id="selectByLocNameSeoul"
-            resultType="com.bitcamp.orl.mountain.domain.MountainLocInfo">
+            resultMap="MountainListResult">
         SELECT mname,mcode,address, x, y,info,height,detail,transport, img
         FROM mountain
         where address regexp '서울|경기';
@@ -42,15 +42,16 @@
     <!-- 이름에 맞는 산 -->
     <select
             id="selectByName"
-            resultType="com.bitcamp.orl.mountain.domain.MountainLocInfo">
+            resultMap="MountainListResult">
         SELECT mname,  mcode, address, x, y,info, height, detail,transport,img
         FROM mountain
         where mname = #{mountainName};
     </select>
-    <!-- 이름들어가는 맞는 산 -->
+
+    <!-- 이름들어가는 맞는 산(검색) -->
     <select
-            id="selectByName1"
-            resultType="com.bitcamp.orl.mountain.domain.MountainLocInfo">
+            id="selectBySearchName"
+            resultMap="MountainListResult">
         SELECT mname,  mcode, address, x, y,info, height, detail,transport,img
         FROM mountain
         where mname regexp #{mountainName};
@@ -77,7 +78,7 @@
     <!-- 지역별 산 리스트(이름순) -->
     <select
             id="selectAllMountain"
-            resultType="com.bitcamp.orl.mountain.domain.MountainLocInfo">
+            resultMap="MountainListResult">
         SELECT mname, mcode, address, x, y, info,height, detail,transport, img
         FROM mountain;
     </select>
