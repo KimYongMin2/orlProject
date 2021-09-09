@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 body {
 	font-family: var(--text-sans);
 	display: flex;
@@ -110,9 +111,10 @@ a:visited {
 	animation-iteration-count: 3;
 }
 
+
 /* label 색과 위치 */
 .int-area input:focus+label, .int-area input:valid+label, .int-area select:focus+label,
-	.int-area select:valid+label {
+.int-area select:valid+label {
 	top: -2px;
 	font-size: 13px;
 	color: #166cea;
@@ -166,4 +168,20 @@ a:visited {
 
 .table_cell {
 	display: table-cell;
+}
+
+/*비동기통신*/
+.display_none {
+	display: none;
+}
+.color_yellow {
+	color:  #FDEF7B;
+	padding-left:15px;
+}
+.color_red {
+	color: red;
+	padding-left:15px;
+}
+#loadingimg,#loadingimg2 {
+	height: 20px;
 }

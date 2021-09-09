@@ -33,11 +33,11 @@
 			</div>
 			<div class="menu">
 				<ul>
-					<c:if test="${sessionScope.member eq null}">
+					<c:if test="${sessionScope.memberVo eq null}">
 						<li><a href="<c:url value='/member/login'/>">로그인</a></li>
 						<li><a href="<c:url value='/member/reg'/>">회원가입</a></li>
 					</c:if>
-					<c:if test="${sessionScope.member ne null }">
+					<c:if test="${sessionScope.memberVo ne null }">
 						<li><a href="#">내 크루</a></li>
 						<li><a href="<c:url value='/feed/userFeed/${sessionScope.member.memberIdx}'/>">내 피드</a></li>
 						<li><a href="<c:url value='/member/mypage'/>">마이페이지</a></li>

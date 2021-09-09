@@ -1,4 +1,5 @@
 <%@ page import="com.bitcamp.orl.member.domain.Member" %>
+<%@ page import="com.bitcamp.orl.member.domain.MemberVo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -8,8 +9,8 @@
 <title>로그인중</title>
 <c:if test="${loginChk}">
 	<%
-		Member member = (Member) request.getSession().getAttribute("member");
-		if(member.getMemberId().equals("admin")){
+		MemberVo memberVo = (MemberVo) request.getSession().getAttribute("memberVo");
+		if(memberVo.getMemberNickName().equals("admin")){
 			response.sendRedirect("/orl/admin/member");
 		}else{
 			response.sendRedirect("/orl/index");

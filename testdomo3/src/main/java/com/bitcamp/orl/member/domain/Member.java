@@ -1,11 +1,12 @@
 package com.bitcamp.orl.member.domain;
 
 import java.sql.Timestamp;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Member {
-	
+
 	private int memberIdx;
 	private String memberId;
 	private String memberPw;
@@ -13,15 +14,13 @@ public class Member {
 	private String memberEmail;
 	private String memberProfile;
 	private String memberNickname;
-	@JsonFormat(pattern = "yyyy.MM.dd. HH:mm")
 	private Timestamp memberRegdate;
-	@JsonFormat(pattern = "yyyy.MM.dd. HH:mm")
-	private Timestamp memberBirth;
-	
+	private String memberBirth;
+
 	public Member() {}
-	
+
 	public Member(int memberIdx, String memberId, String memberPw, String memberName, String memberEmail,
-			String memberProfile, String memberNickname, Timestamp memberRegdate, Timestamp memberBirth) {
+				  String memberProfile, String memberNickname, Timestamp memberRegdate, String memberBirth) {
 		this.memberIdx = memberIdx;
 		this.memberId = memberId;
 		this.memberPw = memberPw;
@@ -97,12 +96,17 @@ public class Member {
 		this.memberRegdate = memberRegdate;
 	}
 
-	public Timestamp getMemberBirth() {
+	public String getMemberBirth() {
+		System.out.println("get메소드 실행");
+		System.out.println("date" + memberBirth);
 		return memberBirth;
 	}
 
-	public void setMemberBirth(Timestamp memberBirth) {
-		this.memberBirth = memberBirth;
+	public void setMemberBirth(String date) {
+		System.out.println("Set메소드 실행");
+		System.out.println("str" + date);
+
+		this.memberBirth = date;
 	}
 
 	@Override
@@ -111,5 +115,14 @@ public class Member {
 				+ memberName + ", memberEmail=" + memberEmail + ", memberProfile=" + memberProfile + ", memberNickname="
 				+ memberNickname + ", memberRegdate=" + memberRegdate + ", memberBirth=" + memberBirth + "]";
 	}
-	
+
+
+	public MemberVo memberToMemberVo(){
+		return new MemberVo(memberIdx, memberNickname);
+	}
+
+
+
+
+
 }

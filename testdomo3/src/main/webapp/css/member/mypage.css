@@ -5,9 +5,18 @@ body {
 }
 
 #profile {
-	height: 25px;
+	width: 70px;
+	height:70px;
 	border-radius: 50%;
 	overflow: hidden;
+}
+.profileSection{
+	padding-left:10px;
+}
+.changeProfile{
+	font-size: 15px;
+	font-weight:bold;
+	color:blue;
 }
 
 .section {
@@ -66,11 +75,6 @@ body {
 	justify-content: center;
 }
 
-#profile2 {
-	height: 45px;
-	border-radius: 50%;
-	overflow: hidden;
-}
 
 .edit_section p {
 	margin-bottom: 0;

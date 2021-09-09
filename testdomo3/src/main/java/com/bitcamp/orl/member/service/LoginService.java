@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bitcamp.orl.member.domain.MemberVo;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,8 @@ public class LoginService {
 		if (memberId != null && memberPw != null && memberId.trim().length() > 2 && memberPw.trim().length() > 2) {
 			Member member = dao.selectByIdPw(memberId, memberPw);
 			if (member != null) {
-				request.getSession().setAttribute("member", member);
+				MemberVo  memberVo= member.memberToMemberVo();
+				request.getSession().setAttribute("memberVo", memberVo);
 				loginChk = true;
 			}
 		}
