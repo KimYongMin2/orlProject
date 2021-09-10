@@ -70,7 +70,8 @@ public class UserFeedController {
 		System.out.println("요청 받음");
 
 		// 세션에 저장된 나의 memberIdx
-		int myIdx = ((Member) request.getSession().getAttribute("member")).getMemberIdx();
+		MemberDto memberVo = (MemberDto) request.getSession().getAttribute("memberVo");
+		int myIdx = memberVo.getMemberIdx();
 
 		// memberIdx에 해당하는 member객체 가져오기
 		// 내가 내 피드로 들어가면 member = 나

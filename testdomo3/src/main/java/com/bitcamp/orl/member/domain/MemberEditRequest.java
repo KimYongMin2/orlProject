@@ -1,9 +1,11 @@
 package com.bitcamp.orl.member.domain;
 
 
+import org.springframework.web.multipart.MultipartFile;
 
 public class MemberEditRequest {
 
+    private MultipartFile memberPhoto;
     private String memberName;
     private String memberEmail;
     private String memberNickname;
@@ -12,11 +14,20 @@ public class MemberEditRequest {
     public MemberEditRequest() {
     }
 
-    public MemberEditRequest(String memberName, String memberEmail, String memberNickname, String birth) {
+    public MemberEditRequest(MultipartFile memberPhoto, String memberName, String memberEmail, String memberNickname, String birth) {
+        this.memberPhoto = memberPhoto;
         this.memberName = memberName;
         this.memberEmail = memberEmail;
         this.memberNickname = memberNickname;
         this.birth = birth;
+    }
+
+    public MultipartFile getMemberPhoto() {
+        return memberPhoto;
+    }
+
+    public void setMemberPhoto(MultipartFile memberPhoto) {
+        this.memberPhoto = memberPhoto;
     }
 
     public String getMemberName() {
@@ -54,7 +65,8 @@ public class MemberEditRequest {
     @Override
     public String toString() {
         return "MemberEditRequest{" +
-                "memberName='" + memberName + '\'' +
+                "memberPhoto=" + memberPhoto +
+                ", memberName='" + memberName + '\'' +
                 ", memberEmail='" + memberEmail + '\'' +
                 ", memberNickname='" + memberNickname + '\'' +
                 ", birth='" + birth + '\'' +

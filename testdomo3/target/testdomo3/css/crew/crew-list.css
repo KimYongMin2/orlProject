@@ -1,0 +1,258 @@
+@charset "UTF-8";
+.justify-content-center {
+    justify-content: flex-start;
+}
+
+.section .article h1,
+.container h1 {
+    font-size: 3.5rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: relative;
+}
+
+.section .nav{
+	margin-left:50%;
+}
+
+.section .inner {
+    overflow: hidden;
+}
+
+.section .inner div {
+    width: 100%;
+    height: 100%;
+}
+
+.section .dropdown {
+    position: initial;
+}
+
+.section .select {
+    display: flex;
+    float: right;
+}
+
+.section .select a {
+    padding: 2px;
+    text-decoration: none;
+    color: #aaa;
+}
+
+.section .select a:hover {
+    color: black;
+}
+
+.section ul li {
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.section .inner img {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section .article-crew div:hover,
+.inner div:hover {
+    opacity: 0.8;
+    transition: all ease-in-out 100ms;
+}
+
+.section h5 {
+    font-weight: bold;
+}
+
+.section .card-body a {
+    background: rgb(253, 239, 123);
+    border: none;
+    color: black;
+}
+
+.section .col-md-4 {
+    padding-bottom: 50px;
+}
+
+.section {
+    padding: 200px 0;
+}
+
+.section .container .row {
+    --bs-gutter-x: 2.5rem;
+    margin-right: calc(var(--bs-gutter-x) * -1.2);
+    margin-left: calc(var(--bs-gutter-x) * -0.7);
+}
+
+.section .btn {
+    padding: 10px;
+    width: 30%;
+    cursor: pointer;
+    border-radius: 7px;
+
+}
+
+.section p {
+    padding-bottom: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+
+}
+
+
+.section a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.section li {
+    list-style: none;
+}
+
+.section div p {
+    overflow: hidden;
+    width: 100%;
+    height: 20px;
+}
+
+.section .search-box {
+    padding-top: 25px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.section .search-box:hover>.search-txt {
+    width: 160px;
+    padding: 0 6px;
+}
+
+.section .search-box:hover>.search-btn {
+    background: white;
+}
+
+.section .search-box input {
+    padding: 5px;
+}
+
+.section .search-btn {
+    color: black;
+    float: right;
+    border-radius: 50%;
+    padding-top: 25px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+
+.section .search-txt {
+    border: white;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: black;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+}
+
+.section .search-box h1 {
+    padding-right: 50%;
+}
+
+.section .crew-insert {
+    padding-left: 64%;
+}
+
+.section .crew-insert a {
+    text-decoration: none;
+    color: black;
+}
+
+.section .crew-insert a:hover {
+    color: cornflowerblue;
+}
+
+
+.section .page {
+    padding-left: 42%;
+}
+
+.section .pagination {
+    position: absolute;
+}
+
+
+.section ul>li>a .card::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    opacity: 0;
+    transition: all .45s;
+}
+
+.section ul>li>a:hover .card::after {
+    opacity: 1;
+}
+
+
+.section .article {
+    border-bottom: 1px solid #aaa;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.section .article div {
+    padding-bottom: 13px;
+}
+
+.section .article .article-crew {
+    text-align: center;
+    float: left;
+    padding: 10px;
+}
+
+.section div::after {
+    display: block;
+    content: '';
+    clear: both;
+
+}
+
+.section .card {
+    width: 25rem;
+    height: 35rem;
+}
+
+.section .card img {
+    width: 100%;
+    height: 350px;
+}
+
+
+.section .article img {
+    border-radius: 70%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+}
+
+.section .article span,
+.section .popular_crew span {
+    font-size: 40px;
+}

@@ -49,7 +49,7 @@ public class FollowController {
 		int followResult = 0;
 
 		// session에 저장된 myIdx 가져오기
-		int myIdx = ((Member) request.getSession().getAttribute("member")).getMemberIdx();
+		int myIdx = ((MemberDto) request.getSession().getAttribute("memberVo")).getMemberIdx();
 
 		if (followStatus == -1) {
 			// -1: 팔로우 그만하기를 눌렀다. -->delete

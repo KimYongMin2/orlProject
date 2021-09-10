@@ -43,10 +43,10 @@ public class CreateFeedService {
 				System.out.println("파일 저장");
 			}
 
-			Member member = (Member) (request.getSession().getAttribute("member")); // 현재 세션의 member 객체 가져옴
+			MemberDto memberVo = (MemberDto) (request.getSession().getAttribute("memberVo")); // 현재 세션의 member 객체 가져옴
 
-			if (member != null) {
-				feed.setMemberIdx(member.getMemberIdx());
+			if (memberVo != null) {
+				feed.setMemberIdx(memberVo.getMemberIdx());
 			}
 
 			// 2. dao 저장

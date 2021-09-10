@@ -1,9 +1,6 @@
 package com.bitcamp.orl.member.domain;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Member {
 
@@ -117,8 +114,8 @@ public class Member {
 	}
 
 
-	public MemberVo memberToMemberVo(){
-		return new MemberVo(memberIdx, memberNickname);
+	public MemberDto memberToMemberVo(){
+		return new MemberDto(memberIdx, memberNickname);
 	}
 
 
