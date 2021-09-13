@@ -174,7 +174,8 @@ a:visited {
 .display_none {
 	display: none;
 }
-.color_blue{
+
+.color_yellow{
 	color:  #FDEF7B;
 	padding-left:15px;
 }
@@ -182,6 +183,6 @@ a:visited {
 	color: red;
 	padding-left:15px;
 }
-#loadingimg,#loadingimg2 {
+#loadingimg,#loadingimg2 , #loadingimg3{
 	height: 20px;
 }

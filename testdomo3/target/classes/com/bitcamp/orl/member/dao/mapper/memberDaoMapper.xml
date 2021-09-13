@@ -71,6 +71,10 @@
 		select count(*) from member where memberNickname=#{memberNickname}
 	</select>
 
+	<!--select nickname체크 -->
+	<select id="selectByEmail" resultType="int">
+		select count(*) from member where memberEmail=#{email}
+	</select>
 
 	<!-- 회원 삭제 -->
 	<delete id="deleteMember">

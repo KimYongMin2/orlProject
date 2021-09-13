@@ -33,6 +33,17 @@ public class CheckService {
 			result="N";
 		}
 		return result;
-	} 
-	
+	}
+
+	public String emailCheck(String email) {
+
+		String result ="Y";
+		dao=template.getMapper(Dao.class);
+
+		if(dao.selectByEmail(email)>0 ||email ==null || email.trim().equals("")) {
+			result="N";
+		}
+		return result;
+	}
+
 }

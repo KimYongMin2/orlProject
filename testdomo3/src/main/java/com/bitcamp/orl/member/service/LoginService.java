@@ -22,7 +22,7 @@ public class LoginService {
    @Autowired
    private SqlSessionTemplate template;
    
-   boolean loginChk = false;
+   boolean loginChk;
 
    public boolean login(
          HttpServletRequest request, 
@@ -33,12 +33,12 @@ public class LoginService {
          ) {
       
       cookieChk(response, reid, memberId);
-      
-      
+
+      loginChk = false;
       dao = template.getMapper(Dao.class);
-      
+      Member member = null;
       if (memberId != null && memberPw != null && memberId.trim().length() > 2 && memberPw.trim().length() > 2) {
-         Member member = dao.selectByIdPw(memberId, memberPw);
+         member = dao.selectByIdPw(memberId, memberPw);
          if (member != null) {
             MemberDto  memberVo= member.memberToMemberVo();
             request.getSession().setAttribute("memberVo", memberVo);

@@ -26,6 +26,9 @@ public interface Dao {
     //닉네임 체크
     int selectByNickName(String memberNickname);
 
+    //email 체크
+    int selectByEmail(String email);
+
     // 회원 정보 삭제
     int deleteMember(int memberIdx);
 
