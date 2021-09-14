@@ -58,7 +58,7 @@ body::before {
 }
 
 .int-area input {
-	width: 100%;
+	width: 110%;
 	padding: 20px 10px 10px;
 	background-color: transparent;
 	border: none;
@@ -164,7 +164,7 @@ translateX(
 	font-weight: 600;
 	color: #545454;
 	border: none;
-	border-radius: 10px;
+	border-radius: 3px;
 	cursor: pointer;
 }
 
@@ -180,36 +180,31 @@ translateX(
 	text-decoration: none;
 }
 
-/* 네이버로 로그인 영역 */
-.naver-login {
-	margin-top: 15px;
-}
-
-.naver-login input {
-	width: 100%;
-	height: 40px;
-	background: #2DB400;
-	font-size: 15px;
-	font-weight: 600;
-	color: #fff;
-	border: none;
-	border-radius: 10px;
-	cursor: pointer;
-}
 
 /* 회원가입 하기 */
 .join-us {
-	margin-top: 15px;
+
 }
 
 .join-us input {
-	width: 100%;
-	height: 40px;
+	margin-right:8px;
+	width: 188px;
+	height: 41px;
 	background-color: #E2E2E2;
 	font-size: 15px;
 	font-weight: 600;
 	color: black;
 	border: none;
-	border-radius: 10px;
+	border-radius: 3px;
 	cursor: pointer;
+}
+.loginbtn{
+	display:flex;
+	align-items:center;
+	margin-top:10px;
+	justify-content: center; 
+}
+#naver_id_login{
+	margin-top:4.5px;
+	text-align:center;
 }

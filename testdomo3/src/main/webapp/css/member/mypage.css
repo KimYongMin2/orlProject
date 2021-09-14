@@ -9,14 +9,15 @@
     justify-content: center;
     align-items: center;
     height:100vh;
-     background:url("../../images/member/main.jpg") no-repeat center;
+    background:url("../../images/member/main.jpg") no-repeat center;
     background-size: cover;
 }
 
 
 #all::before{
     content:"";
-    position:absolute; z-index:1;
+    position:absolute; 
+    z-index:1;
     top:0;
     right:0;
     bottom:0;
@@ -48,13 +49,14 @@
 /* input 설정  */
 .input-area input{
     width:100%;
-    padding:17px 10px 10px;
+    padding:20px 10px 10px;
     background-color: transparent;
     border:none;
     border-bottom: 1px solid #999;
     font-size: 17px;
     color:#fff;
     margin-top: 20px;
+    margin-bottom:5px;
    
 }
 /* input label 설정->NAME, E-MAIL */
@@ -129,15 +131,14 @@
 	font-size : 20px;
 	line-height : 90px;
 }
-.profileSection{
-}
+
 
 /*비동기통신*/
 .display_none {
 	display: none;
 }
-.color_blue {
-    color:  #FDEF7B;
+.color_yellow{
+	color: #FDEF7B;
 	padding-left:10px;
 	font-size:12px;
 }
@@ -146,6 +147,6 @@
 	padding-left:12px;
 	font-size:12px;
 }
-#loadingimg{
+#loadingimg,#loadingimg2,#loadingimg3 {
 	height: 20px;
 }

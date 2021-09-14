@@ -33,10 +33,10 @@ public class LoginService {
          ) {
       
       cookieChk(response, reid, memberId);
-
-      loginChk = false;
+      loginChk=false;
+      
       dao = template.getMapper(Dao.class);
-      Member member = null;
+      Member member=null;
       if (memberId != null && memberPw != null && memberId.trim().length() > 2 && memberPw.trim().length() > 2) {
          member = dao.selectByIdPw(memberId, memberPw);
          if (member != null) {
@@ -47,6 +47,28 @@ public class LoginService {
       }
       return loginChk;
    }
+   
+   public boolean naverLogin(
+	         HttpServletRequest request, 
+	         String memberId,
+	         String memberPw
+	         ) {
+	      
+	      loginChk=false;
+	      
+	      dao = template.getMapper(Dao.class);
+	      Member member=null;
+	      if (memberId != null && memberPw != null && memberId.trim().length() > 2 && memberPw.trim().length() > 2) {
+	         member = dao.selectByIdPw(memberId, memberPw);
+	         if (member != null) {
+	            MemberDto  memberVo= member.memberToMemberVo();
+	            request.getSession().setAttribute("memberVo", memberVo);
+	            loginChk = true;
+	         }
+	      }
+	      return loginChk;
+	   }
+   
    
    
    public void cookieChk(HttpServletResponse response, String reid, String id) {

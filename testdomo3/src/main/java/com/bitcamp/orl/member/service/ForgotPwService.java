@@ -19,6 +19,7 @@ import com.bitcamp.orl.member.dao.Dao;
 
 @Service
 public class ForgotPwService {
+	
 
 	  private Dao dao;
 	   
@@ -28,6 +29,7 @@ public class ForgotPwService {
 	   public String FindPw( HttpServletRequest request,String memberId, String membername,
 		         String memberEmail
 		         ) {
+		   
 		   String findPw=null;
 		   
 		   dao=template.getMapper(Dao.class);
@@ -45,12 +47,12 @@ public class ForgotPwService {
 	   }
 	   
 	   public void mailSender(String pw, String email) throws AddressException, MessagingException {
-
+		   
 	        System.out.println("메일 시작");
 	        // 네이버일 경우 smtp.naver.com 을 입력합니다.// Google일 경우 smtp.gmail.com 을 입력합니다.
 	        String host = "smtp.naver.com";
 	        final String username = "orullay"; // 네이버 아이디를 입력해주세요. @nave.com은 입력하지 마시구요.
-	        final String password = "bitcamp205";   // 네이버 이메일 비밀번호를 입력해주세요.
+	        final String password = "bitcamp205!";   // 네이버 이메일 비밀번호를 입력해주세요.
 	        int port = 465;   // 포트번호
 	// 메일 내용
 	        String recipient = email; //받는 사람의 메일주소를 입력해주세요.
@@ -63,7 +65,6 @@ public class ForgotPwService {
 	        props.put("mail.smtp.auth", "true");
 	        props.put("mail.smtp.ssl.enable", "true");
 	        props.put("mail.smtp.ssl.trust", host);
-
 
 	// Session 생성
 	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {

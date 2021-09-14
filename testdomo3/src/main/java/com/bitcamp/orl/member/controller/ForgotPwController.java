@@ -46,8 +46,9 @@ public class ForgotPwController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			findPw = null;
-		}
 
+		}
+		
 		model.addAttribute("findPw",findPw);
 
 

@@ -18,18 +18,18 @@
         <h1>FORGOT PW</h1>
         <form method="post">
             <div class="input-area">
-                <input id="memberId" type="text" name="memberId" autocomplete="off" required>
+                <input type="text" id="memberId" name="memberId" autocomplete="off" required>
                 <label for="memberId">ID</label>
             </div>
 
             <div class="input-area">
-                <input id="memberName" type="text" name="memberName" autocomplete="off" required>
+                <input type="text" id="memberName" name="memberName" autocomplete="off" required>
                 <label for="memberName">NAME</label>
             </div>
 
             
             <div class="input-area">
-                <input id="memberEmail" type="text" name="memberEmail" autocomplete="off" required>
+                <input type="text" id="memberEmail" name="memberEmail" autocomplete="off" required>
                 <label for="memberEmail">E-MAIL</label>
             </div>
 

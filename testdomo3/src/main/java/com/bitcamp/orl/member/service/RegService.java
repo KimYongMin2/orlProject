@@ -47,4 +47,15 @@ public class RegService {
 		return resultCnt;
 	}
 	
+	public int regNaver(Member member) {
+		
+		int resultCnt=0;
+		
+		dao = template.getMapper(Dao.class);
+			
+		resultCnt=dao.insertMember(member);
+			
+		
+		return resultCnt;
+	}
 }
