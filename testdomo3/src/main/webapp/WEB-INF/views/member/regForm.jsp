@@ -63,7 +63,7 @@
                 <div class="int-area">
                     <input type="text" name="memberNickname" id="nickname" autocomplete="off" required>
                     <label for="nickname">닉네임</label>
-                    <span id="msg2" class="display_none"></span>
+                    <span  id="msg2" class="display_none"></span>
                     <img id="loadingimg2" class="display_none" alt="loading"
                          src="<c:url value="/images/default/loading.gif"/>">
                     <span id="msgchk6"></span>
@@ -111,12 +111,11 @@
     // 비밀번호
     var pwJ = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     // 이름
-    var nameJ = /^[가-힣]{2,6}$/;
+    var nameJ = /^[가-힣A-Za-z]{2,6}$/;
     // 닉네임
-    var ninkJ = /^[가-힣][A-Za-z0-9]{4,12}$/;
+    var ninkJ =  /^[가-힣A-Za-z0-9]{2,12}$/;
     // 이메일 검사
     var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
 
     $(document).ready(function () {
 

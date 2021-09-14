@@ -51,12 +51,12 @@
 
 
             // 지도 상단 전국 산 보기 버튼 클릭 시 전국 산이 마킹된 지도 세팅
-            $('#mapbutton1').click(function(){
+            $('#mapbutton1').click(function () {
                 map(allList);
             })
 
             // 지도 상단 지역별 산 보기 버튼 클릭 시 지역별 산이 마킹된 지도 세팅
-            $('#mapbutton2').click(function(){
+            $('#mapbutton2').click(function () {
                 map(mList);
             })
 
@@ -127,14 +127,14 @@
                     // 마커에 표시할 인포윈도우를 생성합니다
                     var infowindow = new kakao.maps.InfoWindow({
                         content:  // 인포윈도우에 표시할 내용
-                            '<div class="infowindow">'+
-                            '<div class="mapimage">'+
-                            '<img src="https://www.forest.go.kr/images/data/down/mountain/' + positions[i].content.img + '" alt="">'+
-                            '</div>'+
-                            '<div class="mapcontent">'+
-                            '<div class="mtitle">#' + positions[i].content.mountainName + '</div>'+
+                            '<div class="infowindow">' +
+                            '<div class="mapimage">' +
+                            '<img src="https://www.forest.go.kr/images/data/down/mountain/' + positions[i].content.img + '" alt="">' +
+                            '</div>' +
+                            '<div class="mapcontent">' +
+                            '<div class="mtitle">#' + positions[i].content.mountainName + '</div>' +
                             '<div>' + positions[i].content.mountainAddress + '(높이 : ' + positions[i].content.height + 'm)</div>' +
-                            '</div>'+
+                            '</div>' +
                             '</div>'
                     });
 
@@ -150,8 +150,8 @@
                 // 마커 아이콘 클릭 시 상세페이지로 넘어가는 함수
                 function link(name) {
                     return function () {
-                        location.href = '${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + name;
-                    };
+                        $("#mountainName").val(name);
+                        $("#formLoc").submit();                    };
                 }
 
                 // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
@@ -175,21 +175,18 @@
             var mountainList = [];
             mountainList = mList;
 
-            var html = '<div id="listings" class="listings">';
+            var html = '<form id="formLoc" action="${pageContext.request.contextPath}/mountain/mountainDetailInfo" method="POST">';
+            html += '<div id="listings" class="listings">';
             $.each(mountainList, function (index, item) {
                 html += ' <div class="listings_item">';
                 html += ' <div class="listings_image">';
-                html += '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + item.mountainName + '">';
-                html += ' <img src="https://www.forest.go.kr/images/data/down/mountain/' + item.img + '" alt="">';
-                html += '</a>';
+                html += ' <img onclick="setParamLoc(this.title)" src="https://www.forest.go.kr/images/data/down/mountain/' + item.img + '" alt="" title="'+item.mountainName+'">';
                 html += '</div>';
                 html += ' <div class="listings_content">';
                 html += ' <div class="listings_title">';
                 html += ' <div class="listings_text">';
                 html += '  <span class="greyText">${loc} 산 전체</span>';
-                html += '<a href="${pageContext.request.contextPath}/mountain/mountainDetailInfo?mountainName=' + item.mountainName + '">';
-                html += ' <h2>#' + item.mountainName + '</h2>';
-                html += '</a>';
+                html += ' <h2 onclick="setParamLoc(this.title)" title="'+item.mountainName+'">#' + item.mountainName + '</h2>';
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="listings_description">';
@@ -200,9 +197,18 @@
                 html += '</div>';
                 html += '</div>';
 
-                $('#mList').html(html);
+
             })
+            html += '<input name="mountainName" id="mountainName" type="hidden" value="">'
+            html += '</form>';
+            $('#mList').html(html);
         }
+
+            function setParamLoc(loc){
+            $("#mountainName").val(loc);
+            $("#formLoc").submit();
+        }
+
 
         /* 날씨 api */
         let weatherIcon = {
@@ -289,8 +295,8 @@
 
         <!-- 정렬을 위한 버튼-->
         <div class="main_filters">
-            <button class="outlined curved" id="namelist"  value="namelist">이름순으로 보기</button>
-            <button class="outlined curved" id="heightlist"  value="heightlist">높이순으로 보기</button>
+            <button class="outlined curved" id="namelist" value="namelist">이름순으로 보기</button>
+            <button class="outlined curved" id="heightlist" value="heightlist">높이순으로 보기</button>
         </div>
 
 

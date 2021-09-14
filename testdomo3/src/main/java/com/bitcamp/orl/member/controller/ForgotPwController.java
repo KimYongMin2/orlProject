@@ -36,16 +36,20 @@ public class ForgotPwController {
 		
 		String findPw= service.FindPw(request,memberId, memberName, memberEmail);
 		
-		model.addAttribute("findPw",findPw);
 		try {
 			service.mailSender(findPw, memberEmail);
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			findPw = null;
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			findPw = null;
 		}
+
+		model.addAttribute("findPw",findPw);
+
 
 
 		return "member/findPw";
