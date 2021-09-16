@@ -15,6 +15,7 @@ import com.bitcamp.orl.crew.domain.CrewCommentCriteria;
 import com.bitcamp.orl.crew.domain.CrewCommentInfo;
 import com.bitcamp.orl.crew.domain.CrewCommentPagingDTO;
 import com.bitcamp.orl.member.domain.Member;
+import com.bitcamp.orl.member.domain.MemberDto;
 
 @Service
 public class CrewCommentService {
@@ -25,13 +26,11 @@ public class CrewCommentService {
 	SqlSessionTemplate template;
 	
 	public CrewCommentPagingDTO getCrewComment(CrewCommentCriteria cri) {
-		
 		dao = template.getMapper(Dao.class);
 		
 		if(cri.getCurrentPageNum() == 0) {
 			cri.setCurrentPageNum(1);
 		}
-		
 		int startRow = (cri.getCurrentPageNum()-1) * (cri.getAmountPerPage());
 		int endRow = startRow + cri.getAmountPerPage();
 		int totalCommentNum = dao.selectCrewCommentNum(cri.getCrewIdx());
@@ -47,17 +46,17 @@ public class CrewCommentService {
 				infoList.add(info);
 			}
 		}
-		
 		CrewCommentPagingDTO dto = new CrewCommentPagingDTO(
 				infoList, totalCommentNum, cri, startRow, endRow);
-		
-		
 		return dto;
 	}
 	
 	public Member getCommentMember(int memberIdx) {
-		dao = template.getMapper(Dao.class);
-		return dao.selectMemberByMemberIdx(memberIdx);
+		return template.getMapper(Dao.class).selectMemberByMemberIdx(memberIdx);
+	}
+	
+	public CrewCommentInfo getCrewCommentInfo(int crewCommentIdx) {
+		return template.getMapper(Dao.class).getCrewCommentInfo(crewCommentIdx);
 	}
 	
 	public int insertCrewComment(
@@ -67,8 +66,21 @@ public class CrewCommentService {
 			) {
 		int resultCnt = 0;
 		dao = template.getMapper(Dao.class);
-		Member member = (Member)session.getAttribute("member");
-		resultCnt = dao.insertCrewComment(crewComment, member.getMemberIdx(), crewIdx);
+		MemberDto dto = (MemberDto)session.getAttribute("memberVo");
+		resultCnt = dao.insertCrewComment(crewComment, dto.getMemberIdx(), crewIdx);
 		return resultCnt;
+	}
+	
+	public int deleteCrewComment(
+			int crewCommentIdx
+			) {
+		return template.getMapper(Dao.class).deleteCrewComment(crewCommentIdx);
+	}
+	
+	public int updateCrewComment(
+			String crewComment,
+			int crewCommentIdx
+			) {
+		return template.getMapper(Dao.class).updateCrewComment(crewComment, crewCommentIdx);
 	}
 }

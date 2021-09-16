@@ -1,22 +1,26 @@
 package com.bitcamp.orl.feed.service;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
 
-import org.mybatis.spring.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.web.multipart.*;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.bitcamp.orl.feed.dao.*;
-import com.bitcamp.orl.feed.domain.*;
-import com.bitcamp.orl.member.domain.*;
+import com.bitcamp.orl.feed.dao.FeedDao;
+import com.bitcamp.orl.feed.domain.Feed;
+import com.bitcamp.orl.feed.domain.FeedCreateRequest;
+import com.bitcamp.orl.member.domain.MemberDto;
 
 @Service
 public class CreateFeedService {
-
-	FeedDao dao;
+	
+	// 피드 게시 : insert
+	
+	private FeedDao dao;
 
 	@Autowired
 	private SqlSessionTemplate template;
@@ -33,11 +37,13 @@ public class CreateFeedService {
 		try {
 			// 1. 파일 저장
 			// feed 객체 생성 -> 저장된 파일의 이름을 set
+			
+			System.out.println(createRequest);
 			Feed feed = createRequest.toFeed();
+			
 
 			if (createRequest.getBoardPhoto() != null && !createRequest.getBoardPhoto().isEmpty()) {
 				// 파일 저장 메소드
-				System.out.println(createRequest);
 				newFile = saveFile(request, createRequest.getBoardPhoto());
 				feed.setBoardPhoto(newFile.getName());
 				System.out.println("파일 저장");
@@ -47,6 +53,7 @@ public class CreateFeedService {
 
 			if (memberVo != null) {
 				feed.setMemberIdx(memberVo.getMemberIdx());
+				//feed.setMemberNickname(memberVo.getMemberNickname());
 			}
 
 			// 2. dao 저장

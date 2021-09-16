@@ -42,8 +42,8 @@
       <tr>
         <td>${list.crewIdx}</td>
         <td>${list.crewName}</td>
-        <td>${list.crewPhoto}</td>
-        <td style="max-width:400px">${list.crewDiscription}</td>
+        <td><img src="<c:url value='/images/crew/${list.crewPhoto}'/>" style="width:100px"></td>
+        <td style="max-width:350px;overflow:auto">${list.crewDiscription}</td>
         <td style="max-width:100px">${list.crewCreatedate}</td>
         <td style="max-width:300px">${list.crewTag}</td>
         <td><p class="text-center">${list.memberNickName}</p></td>

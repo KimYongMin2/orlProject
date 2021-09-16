@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bitcamp.orl.crew.dao.Dao;
 import com.bitcamp.orl.crew.domain.Crew;
 import com.bitcamp.orl.crew.domain.CrewInfo;
-import com.bitcamp.orl.member.domain.Member;
+import com.bitcamp.orl.member.domain.MemberDto;
 
 @Service
 public class CrewDetailService {
@@ -25,13 +25,13 @@ public class CrewDetailService {
 			) {
 		
 		CrewInfo crewinfo = getCrew(crewIdx).crewToCrewInfo();
-		Member member = (Member)session.getAttribute("member");
+		MemberDto dto = (MemberDto)session.getAttribute("memberVo");
 		
 		crewinfo.setCrewMemberNum(getCrewMemberNum(crewIdx));
 		crewinfo.setCrewCommentNum(getCrewCommentNum(crewIdx));
 		
-		if(member != null) {
-			crewinfo.setIsReg(getIsCrewMember(member.getMemberIdx(), crewIdx));
+		if(dto != null) {
+			crewinfo.setIsReg(getIsCrewMember(dto.getMemberIdx(), crewIdx));
 		} else {
 			crewinfo.setIsReg(false);
 		}

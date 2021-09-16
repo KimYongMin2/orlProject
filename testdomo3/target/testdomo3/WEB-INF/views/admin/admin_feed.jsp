@@ -27,28 +27,26 @@
     <thead>
       <tr>
         <th>IDX</th>
-        <th>이름</th>
         <th>사진</th>
         <th>설명</th>
-        <th>생성일</th>
         <th>해시태그</th>
-        <th>크루장</th>
-        <th>관리</th>
+        <th>멤버닉네임</th>
+        <th>멤버프로필</th>
         <th>관리</th>
       </tr>
     </thead>
     <tbody id="myTable">
-    <c:forEach items="${crewList}" var="list">
+    <c:forEach items="${feedList}" var="list">
       <tr>
-        <td>${list.crewIdx}</td>
-        <td>${list.crewName}</td>
-        <td>${list.crewPhoto}</td>
-        <td style="max-width:400px">${list.crewDiscription}</td>
-        <td style="max-width:100px">${list.crewCreatedate}</td>
-        <td style="max-width:300px">${list.crewTag}</td>
+        <td>${list.boardIdx}</td>
+        <td><img src="<c:url value='/images/feed/${list.boardPhoto}'/>" style="width:100px" ></td>
+        <td>${list.boardDiscription}</td>
+        <td style="max-width:400px">${list.hashtag}</td>
+        <td style="max-width:100px">${list.memberNickname}</td>
+        <td><img src="<c:url value='/images/member/${list.memberProfile}'/>" style="width:100px"></td>
         <td><p class="text-center">${list.memberNickName}</p></td>
         <td>
-             <a id = "deleteId" href="<c:url value='/admin/member/delete?memberIdx=${list.memberIdx}'/>" onclick="if(!confirm('삭제하시겠습니까?')){return false;}">삭제</a>
+             <a id = "deleteId" href="<c:url value='/admin/feed/delete?boardIdx=${list.boardIdx}'/>" onclick="if(!confirm('삭제하시겠습니까?')){return false;}">삭제</a>
         </td>
            <td>
         	

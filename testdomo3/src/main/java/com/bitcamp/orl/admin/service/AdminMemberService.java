@@ -25,10 +25,10 @@ public class AdminMemberService {
 		
 	}
 	
-//	//멤버 삭제하기
-//	public int deleteMember(int memberIdx) {
-//		return template.getMapper(Dao.class).deleteMember(memberIdx);
-//
-//	}
+	//멤버 삭제하기
+	public int deleteMember(int memberIdx) {
+		return template.getMapper(Dao.class).deleteMember(memberIdx);
+		
+	}
 	
 }

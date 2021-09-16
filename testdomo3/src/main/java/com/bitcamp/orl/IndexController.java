@@ -8,11 +8,10 @@ public class IndexController {
    
    @RequestMapping("/")
    public String getIndexPage() {
-      return "redirect:/index";
+      return "redirect:/main/main";
    }
    
    @RequestMapping("/index")
-   public String getIndex() {
-      return "/index";
+   public void getIndex() {
    }
 }

@@ -258,25 +258,33 @@ button {
 #home_3 {
     min-height: 100vh;
     display: flex;
-    background: url(../../images/crew/1.png);
+    background: url(../images/1.png);
 
 }
 
 #home_4 {
-    width: 100%;
+	width:90%;
+	height:100vh;
     background-image: url(../../images/crew/메인4.png);
+	margin:0 auto;
 }
-
+#last{
+	background-color:var(--yello-color);
+}
 
 .home_4_mini {
     padding: 225px;
-    background: url(../../images/crew/메인4.png);
+    background: url(../images/메인4.png);
 }
 
 .home_4_mini img {
     position: relative;
     width: 68%;
     padding-top: 20px;
+    vertical-align:middle
+}
+.lastImg{
+	vertical-align:middle
 }
 
 

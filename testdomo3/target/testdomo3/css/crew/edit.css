@@ -40,7 +40,6 @@ body {
   flex-direction: row;
   justify-content: center;
   max-width: 800px;
-  padding-top: 100px;
 }
 
 .nav2 {
@@ -58,7 +57,6 @@ body {
 }
 
 .edit_section {
-	
   min-width: 800px;
   background-color: white;
   padding: 35px 50px 35px 50px;
@@ -71,8 +69,8 @@ body {
 }
 
 .hiking {
-  height: 250px;
-  width: 250px;
+  height: 300px;
+  width: 300px;
   overflow: hidden;
 }
 
@@ -80,16 +78,11 @@ body {
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 }
 
-.edit_section label {
-  font-weight: bold;
-  min-width: 130px;
-  font-size: 17px;
-}
-
 .edit_section input {
 	padding-left: 8px;
   font-size: 15px;
   height: 55px;
+  width: 300px;
 }
 
 .edit_section input[type="submit"] {
@@ -159,11 +152,6 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-form {
-  padding-top: 16px;
-  padding-left: 80px;
 }
 
 .edit_section ul li.tag-item {

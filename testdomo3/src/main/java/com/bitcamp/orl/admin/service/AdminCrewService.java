@@ -10,12 +10,12 @@ import com.bitcamp.orl.crew.dao.Dao;
 @Service
 public class AdminCrewService {
 
-		//멤버의 Dao
+		//크루의 Dao
 		private Dao dao;
-
+		
 		@Autowired
 		private SqlSessionTemplate template;
-
+		
 		// 크루 삭제
 		public int deleteCrew(int crewIdx) {
 			return template.getMapper(Dao.class).deleteCrew(crewIdx);

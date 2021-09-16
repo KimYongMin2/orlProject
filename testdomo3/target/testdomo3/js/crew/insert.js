@@ -1,8 +1,76 @@
 
 var sel_file;
+var nickJ = /^[가-힣A-Za-z0-9]{4,12}$/;
+var checkNick = true;
 
+function form_submit(form) {
+    if (checkNick){
+        form.submit();
+    }else{
+        return false;
+    }
+}
 $(document).ready(function () {
+    // 비동기통신 스타일 속성
+    $('#crewName').focusin(function () {
+        $('#msg').addClass('display_none');
+        $('#msg').removeClass('color_yellow');
+        $('#msg').removeClass('color_red');
+        $(this).val('');
+    });
+    //1. 아이디 유효성 체크
+    $("#crewName").blur(function () {
+        if (nickJ.test($(this).val())) {
+            console.log(nickJ.test($(this).val()));
+            $("#crewName_check").text('');
+            // 유효성 체크 되면 비동기통신으로  id 중복 체크
+            $.ajax({
+                url: 'http://localhost:8080/orl/crew/nameCheck',
+                type: 'get',
+                data: {
+                    crewName : $(this).val()
+                },
+                beforeSend: function () {
+                    $('#loadingimg').removeClass('display_none');
+                },
+                success: function (data) {
+                    // data : Y / N
+                    if (data == 'Y') {
+                        $('#msg').html('사용가능');
+                        $('#msg').addClass('color_yellow');
+                        $('#msg').removeClass('display_none');
+                        checkNick = true;
+                    } else {
+                        $('#msg').html('사용 불가능');
+                        $('#msg').addClass('color_red');
+                        $('#msg').removeClass('display_none');
+                        checkNick = false;
+                    }
+                },
+                error: function (request, status, error) {
+                    alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
+                    console.log(request);
+                    console.log(status);
+                    console.log(error);
+                },
+                complete: function () {
+                    $('#loadingimg').addClass('display_none');
+                }   
+            });
+            } else {
+                /*    alert('아이디는 4자 이상 12자 이하여야하며 ,대문자/소문자/숫자만 사용할 수 있습니다.'); */
+                $('#crewName_check').removeClass('display_none');
+                $('#crewName_check').text('닉네임을 다시 입력해주세요.');
+                $('#crewName_check').css('color', '#f82a2aa3');
+                checkNick = false;
+            }
+        });
+        
+
+    
     $("#crewPhoto").on("change", handleImgFileSelect);
+
+ 
 });
 
 function handleImgFileSelect(e) {
@@ -47,18 +115,13 @@ function viewImage(img) {
     H = img1.height;
     O = "width=" + W + ",height=" + H + ",scrollbars=yes";
     imgWin = window.open("", "", O);
-    imgWin.document.write("<html><head><title>:*:*:*: 이미지상세보기 :*:*:*:*:*:*:</title></head>");
+    imgWin.document.write("<html><head><title>:*:*:*: 이미지상세보기 :*:*:*:</title></head>");
     imgWin.document.write("<body topmargin=0 leftmargin=0>");
     imgWin.document.write("<img src=" + img + " onclick='self.close()' style='cursor:pointer;' title ='클릭하시면 창이 닫힙니다.'>");
     imgWin.document.close();
 }
 
-function menuToggle() {
-    const toggleMenu = document.querySelector('.menu');
-    toggleMenu.classList.toggle('active')
-}
-
-
+///////////////////////
 
 $(document).ready(function () {
 
@@ -69,13 +132,6 @@ $(document).ready(function () {
     function addTag(value) {
         tag[counter] = value;
         counter++; // del-btn 의 고유 id 가 된다.
-    }
-
-    // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
-    function marginTag() {
-        return Object.values(tag).filter(function (word) {
-            return word !== "";
-        });
     }
 
     // 서버에 제공
@@ -90,10 +146,9 @@ $(document).ready(function () {
         if (e.key === "Enter" || e.keyCode == 32) {
 
             var tagValue = self.val(); // 값 가져오기
-
             // 해시태그 값 없으면 실행X
-            if (tagValue !== "") {
 
+            if (tagValue !== "") {
                 // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
                 var result = Object.values(tag).filter(function (word) {
                     return word === tagValue;
@@ -102,7 +157,7 @@ $(document).ready(function () {
                 // 해시태그가 중복되었는지 확인
                 if (result.length == 0) {
                     $("#tag-list").append("<li class='tag-item'>" + tagValue + "<span class='del-btn' idx='" + counter + "'>x"+
-                    "</span><input type='hidden' name='crewTag' id='rdTag' value=#"+tagValue+"></li>");
+                    "</span><input type='hidden' name='crewTag' id='rdTag' value="+tagValue+"></li>");
                     addTag(tagValue);
                     self.val("");
                 } else {
@@ -121,49 +176,5 @@ $(document).ready(function () {
         $(this).parent().remove();
     });
 
-
-    
-    //이름 중복 검사
-    $('#crewname').focusin(function() {
-		$('#msg').addClass('display_none');
-		$('#msg').removeClass('color_blue');
-		$('#msg').removeClass('color_red');
-		$(this).val('');
-	});
-	$('#crewname').focusout(function() {
-		// ajax 비동기 통신 > id를 서버로 보내고 사용 가능 유무의 응답 코드를 받는다 -> 화면에 메시지 출력
-		$.ajax({
-            url: 'http://localhost:8080/orl/crew/nameCheck',
-			type : 'get',
-			data : {
-				crewName : $(this).val()
-			},
-			beforeSend : function() {
-				$('#loadingimg').removeClass('display_none');
-			},
-			success : function(data) {
-				// data : Y / N
-				if (data == 'Y') {
-					$('#msg').html('사용가능');
-					$('#msg').addClass('color_blue');
-					$('#msg').removeClass('display_none');
-				} else {
-					$('#msg').html('사용 불가능');
-					$('#msg').addClass('color_red');
-					$('#msg').removeClass('display_none');
-				}
-			console.log("처리 성공시 변경되는 내용")
-			},
-			error : function(request, status, error) {
-				alert('서버 통신에 문제가 발생했습니다. 다시 실행해주세요.');
-				console.log(request);
-				console.log(status);
-				console.log(error);
-			},
-			complete : function() {
-				$('#loadingimg').addClass('display_none');
-			}
-		});
-	});
 
 })

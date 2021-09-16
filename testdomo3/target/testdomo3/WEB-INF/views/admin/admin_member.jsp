@@ -29,9 +29,9 @@
       <tr>
         <th>IDX</th>
         <th>아이디</th>
+        <th>프로필사진</th>
         <th>이름</th>
         <th>Email</th>
-        <th>프로필사진</th>
         <th>닉네임</th>
         <th>가입일</th>
         <th>생일</th>
@@ -43,10 +43,10 @@
     <c:forEach items="${memberList}" var="list">
       <tr>
         <td>${list.memberIdx}</td>
-        <td>${list.memberId}</td>
+        <td style="max-width:150px;overflow:auto">${list.memberId}</td>
+        <td><img src="<c:url value='/images/member/profile/${list.memberProfile}'/>" style="width:100px"></td>
         <td>${list.memberName}</td>
         <td>${list.memberEmail}</td>
-        <td><img src="<c:url value='/images/member/${list.memberProfile}'/>" style="width:100px"></td>
         <td>${list.memberNickname}</td>
         <td>${list.memberRegdate}</td>
         <td>${list.memberBirth}</td>
@@ -69,26 +69,19 @@
         <h4 class="modal-title">피드 미리보기</h4>
       </div>
       <div class="modal-body selectList">
-                <div class="item">
-	                 <img class="img" src="" alt="" width="80px" height="80px">
-                    <span>#이름</span>
-                </div>
-                 <div class="item">
-	                 <img class="img" src="" alt="" width="80px" height="80px">
-                    <span>#이름</span>
-                </div>
-                 <div class="item">
-	                 <img class="img" src="" alt="" width="80px" height="80px">
-                    <span>#이름</span>
-                </div>
-      			 <div class="item">
-	                 <img class="img" src="" alt="" width="80px" height="80px">
-                    <span>#이름</span>
-                </div>
-      			 <div class="item">
-	                 <img class="img" src="" alt="" width="80px" height="80px">
-                    <span>#이름</span>
-                </div>
+      
+      
+      
+      
+      <c:forEach items="${feedList}" var="fList">
+	      <c:if test="${memberList.memberIdx eq feedList.memberIdx}">
+	                <div class="item">
+	                	 <img class="img" src="<c:url value='/images/member/${list.memberProfile}'/>"  width="80px" height="80px">
+	                    <span># ${fList.boardIdx}</span>
+	                </div>
+	      </c:if>
+      </c:forEach>
+               
        
       </div>
       <div class="modal-footer">

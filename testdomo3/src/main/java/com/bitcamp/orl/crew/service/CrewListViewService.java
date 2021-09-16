@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.bitcamp.orl.crew.dao.Dao;
 import com.bitcamp.orl.crew.domain.Crew;
 import com.bitcamp.orl.crew.domain.SearchType;
-import com.bitcamp.orl.member.domain.Member;
+import com.bitcamp.orl.member.domain.MemberDto;
 
 @Service
 public class CrewListViewService {
@@ -21,58 +21,55 @@ public class CrewListViewService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	// 크루 리스트 (이름순)
-	public List<Crew> getCrewNameInfo(String crewName) {
-		List<Crew> crewList = null;
-		dao = template.getMapper(Dao.class);
-		return crewList;
-	}
-
 	public List<Crew> getMyCrewList(
 			HttpServletRequest request
 			) {
 
 		List<Crew> myCrewList = null;
-		Member member = (Member) request.getSession().getAttribute("member");
-		if (member != null) {
-			int memberIdx = member.getMemberIdx();
+		MemberDto dto = (MemberDto) request.getSession().getAttribute("memberVo");
+		if (dto != null) {
+			int memberIdx = dto.getMemberIdx();
 			dao = template.getMapper(Dao.class);
 			myCrewList = dao.selectMyCrewList(memberIdx);
 		}
 		return myCrewList;
 	}
 
-	public List<Crew> getMyCrewList(int memberIdx) {
-		List<Crew> myCrewList = null;
+	//오버로딩  09.06 세라
+		public List<Crew> getMyCrewList(
+				int memberIdx
+				){
+			
+			List<Crew> myCrewList = null;
 			dao = template.getMapper(Dao.class);
 			myCrewList = dao.selectMyCrewList(memberIdx);
-		return myCrewList;
-	}
-
-	public List<Crew> getMyCrewList(
-			HttpServletRequest request, 
-			SearchType searchType
-			) {
-
-		List<Crew> myCrewList = null;
-
-		Member member = (Member) request.getSession().getAttribute("member");
-		if (member != null) {
-			int memberIdx = member.getMemberIdx();
-			dao = template.getMapper(Dao.class);
-			myCrewList = dao.selectMyCrewList(memberIdx, searchType);
-		}
-		return myCrewList;
-	};
-
-	public List<Crew> getCrewListAll() {
+			
+			
+			return myCrewList;
+		};
+		
+	
+	public List<Crew> getCrewListAll(int pageStart, int perPageNum) {
 		dao = template.getMapper(Dao.class);
-		return dao.selectAll();
+		return dao.selectAll(pageStart, perPageNum);
 	}
 
 	public List<Crew> getCrewListAll(SearchType searchType){
 		dao = template.getMapper(Dao.class);
 		return dao.selectCrewAll(searchType);
 	}
-
+	
+	public List<Crew> getCrewListAdmin(){
+		dao = template.getMapper(Dao.class);
+		return dao.selectCrewListByAdmin();
+	}
+	
+	
+	public int getCrewCount() {
+		return template.getMapper(Dao.class).CrewCount();
+	}
+	
+	public int getCrewCountForSearching(SearchType searchType) {
+		return template.getMapper(Dao.class).CrewCountForSearching(searchType);
+	}
 }

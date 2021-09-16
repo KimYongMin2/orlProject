@@ -26,11 +26,11 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+
 	<beans:bean id="multipartResolver"
 				class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
 				p:defaultEncoding="utf-8" p:maxUploadSize="10000000">
 	</beans:bean>
-
 
 	<!-- 로그인 체크 인터셉터 등록-->
 	<interceptors>
@@ -43,8 +43,12 @@
 		</interceptor>
 	</interceptors>
 
+
 	<beans:bean id="naverLoginBO" class="com.bitcamp.orl.member.domain.NaverLoginBO"/>
 
 	<context:component-scan base-package="com.bitcamp.orl" />
+
+
+
 
 </beans:beans>

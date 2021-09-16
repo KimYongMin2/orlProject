@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service;
 import com.bitcamp.orl.crew.dao.Dao;
 import com.bitcamp.orl.crew.domain.Crew;
 import com.bitcamp.orl.crew.domain.CrewInsertRequest;
-import com.bitcamp.orl.member.domain.Member;
+import com.bitcamp.orl.member.domain.MemberDto;
 
 @Service
 public class CrewManageService {
+	
+	final String UPLOAD_URI ="/images/crew";
 	
 	Dao dao;
 	
@@ -26,10 +28,10 @@ public class CrewManageService {
 			HttpServletRequest request
 			) {
 		boolean chk = false;
-		Member member = (Member)request.getSession().getAttribute("member");
+		MemberDto dto = (MemberDto)request.getSession().getAttribute("memberVo");
 		
 		try {
-			int nowAuthIdx = member.getMemberIdx();
+			int nowAuthIdx = dto.getMemberIdx();
 			int crewAuthIdx = selectCrew(crewIdx).getMemberIdx();
 			if(nowAuthIdx == crewAuthIdx) {
 				chk = true;
@@ -58,7 +60,6 @@ public class CrewManageService {
 		dao = template.getMapper(Dao.class);
 		
 		CrewInsertService insertservice = new CrewInsertService();
-		
 		try {
 			if (crewRequest.getCrewPhoto() != null && !crewRequest.getCrewPhoto().isEmpty()) {
 				newFile = insertservice.saveFile(request, crewRequest.getCrewPhoto());
@@ -87,7 +88,8 @@ public class CrewManageService {
 	
 	public int deleteCrew(
 			int crewIdx,
-			String crewName
+			String crewName,
+			HttpServletRequest request
 			) {
 		int resultCnt = 0;
 		dao = template.getMapper(Dao.class);
@@ -95,7 +97,6 @@ public class CrewManageService {
 		Crew crew = selectCrew(crewIdx);
 		if(crew.getCrewName().contentEquals(crewName)) {
 			resultCnt = dao.deleteCrew(crewIdx);
-
 		}
 		return resultCnt;
 	}

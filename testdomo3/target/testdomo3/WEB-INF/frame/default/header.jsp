@@ -23,9 +23,9 @@
 			<div class="nav">
 				<ul>
 					<li><a href="<c:url value='/'/>">MAIN</a></li>
-					<li><a href="<c:url value='/mountain/mountainAllInfo/'/>">HIKING</a></li>
+					<li><a href="<c:url value='/mountain/mountainAllInfo/'/>">MOUNTAIN</a></li>
 					<li><a href="<c:url value='/crew/list'/>">CREW</a></li>
-					<li><a href="<c:url value='/feed/feedmain'/>">COMMUNITY</a></li>
+					<li><a href="<c:url value='/feed/feedmain'/>">FEED</a></li>
 					<li><div class="icon" onclick="menuToggle();">
 							<a href="#"><i class="far fa-user"></i></a>
 						</div></li>
@@ -38,7 +38,7 @@
 						<li><a href="<c:url value='/member/reg'/>">회원가입</a></li>
 					</c:if>
 					<c:if test="${sessionScope.memberVo ne null }">
-						<li><a href="#">내 크루</a></li>
+						<li><a href="<c:url value='/crew/list'/>">내 크루</a></li>
 						<li><a href="<c:url value='/feed/userFeed/${sessionScope.memberVo.memberIdx}'/>">내 피드</a></li>
 						<li><a href="<c:url value='/member/mypage'/>">마이페이지</a></li>
 						<li><a href="<c:url value='/member/logout'/>">로그아웃</a></li>

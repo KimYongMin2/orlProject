@@ -78,6 +78,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+
+            var feedList = [];
+
+
+            // 시작할때 비동기 통신으로 지역별 산 리스트 받아와서 mList에 저장
+            $.ajax({
+                url: '<c:url value="/mountain/local"/>',
+                type: 'GET',
+                data: {loc: '${loc}'},
+                success: function (data) {
+                    mList = data;
+                    mountainList(mList);
+                }
+
+            })
+
+        });
+    </script>
     <!-- 지도-->
     <div id="map" class="map" style="width: 85%; height: 800px; margin: 0px auto ;">
         <%
