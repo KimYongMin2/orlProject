@@ -24,7 +24,7 @@ public class SearchController {
     public String search(HttpServletRequest request, Model model) {
 
         String search = null;
-        search = request.getParameter("mysearch");
+        search = request.getParameter("mysearch").trim();
 
         List<MountainLocInfo> mountainListByName = null;
         List<MountainLocInfo> mountainListByLoc = null;

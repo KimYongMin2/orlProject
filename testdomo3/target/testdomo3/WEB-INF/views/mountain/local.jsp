@@ -180,13 +180,13 @@
             $.each(mountainList, function (index, item) {
                 html += ' <div class="listings_item">';
                 html += ' <div class="listings_image">';
-                html += ' <img onclick="setParamLoc(this.title)" src="https://www.forest.go.kr/images/data/down/mountain/' + item.img + '" alt="" title="'+item.mountainName+'">';
+                html += ' <img style="cursor: pointer" onclick="setParamLoc(this.title)" src="https://www.forest.go.kr/images/data/down/mountain/' + item.img + '" alt="" title="'+item.mountainName+'">';
                 html += '</div>';
                 html += ' <div class="listings_content">';
                 html += ' <div class="listings_title">';
                 html += ' <div class="listings_text">';
                 html += '  <span class="greyText">${loc} 산 전체</span>';
-                html += ' <h2 onclick="setParamLoc(this.title)" title="'+item.mountainName+'">#' + item.mountainName + '</h2>';
+                html += ' <h2 style="cursor: pointer" onclick="setParamLoc(this.title)" title="'+item.mountainName+'">#' + item.mountainName + '</h2>';
                 html += '</div>';
                 html += '</div>';
                 html += '<div class="listings_description">';

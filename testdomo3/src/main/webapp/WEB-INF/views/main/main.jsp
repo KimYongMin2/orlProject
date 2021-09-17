@@ -33,7 +33,12 @@
 					<li><a href="<c:url value='/crew/list'/>">CREW</a></li>
 					<li><a href="<c:url value='/feed/feedmain'/>">FEED</a></li>
                     <div class="icon" onclick="menuToggle();">
-                        <a href="#"><i class="far fa-user"></i></a>
+                        <c:if test="${sessionScope.memberVo eq null}">
+                            <i class="far fa-user"></i>
+                        </c:if>
+                        <c:if test="${sessionScope.memberVo ne null }">
+                            <i class="fas fa-user"></i>
+                        </c:if>
                     </div>
                 </ul>
             </div>
