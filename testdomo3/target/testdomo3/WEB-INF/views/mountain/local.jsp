@@ -29,7 +29,7 @@
             // 시작할때 비동기 통신으로 지역별 산 리스트 받아와서 mList에 저장
             $.ajax({
                 url: '<c:url value="/mountain/local"/>',
-                type: 'GET',
+                type: 'POST',
                 data: {loc: '${loc}'},
                 success: function (data) {
                     mList = data;
